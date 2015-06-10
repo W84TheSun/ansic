@@ -1,0 +1,673 @@
+    lex.py: 931:lex: tokens   = ('AUTO', 'BREAK', 'CASE', 'CHAR', 'CONST', 'CONTINUE', 'DEFAULT', 'DO', 'DOUBLE', 'ELSE', 'ENUM', 'EXTERN', 'FLOAT', 'FOR', 'GOTO', 'IF', 'INT', 'LONG', 'REGISTER', 'RETURN', 'SHORT', 'SIGNED', 'SIZEOF', 'STATIC', 'STRUCT', 'SWITCH', 'TYPEDEF', 'UNION', 'UNSIGNED', 'VOID', 'VOLATILE', 'WHILE', 'ID', 'TYPEID', 'ICONST', 'FCONST', 'SCONST', 'CCONST', 'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'MOD', 'OR', 'AND', 'NOT', 'XOR', 'LSHIFT', 'RSHIFT', 'LOR', 'LAND', 'LNOT', 'LT', 'LE', 'GT', 'GE', 'EQ', 'NE', 'EQUALS', 'TIMESEQUAL', 'DIVEQUAL', 'MODEQUAL', 'PLUSEQUAL', 'MINUSEQUAL', 'LSHIFTEQUAL', 'RSHIFTEQUAL', 'ANDEQUAL', 'XOREQUAL', 'OREQUAL', 'PLUSPLUS', 'MINUSMINUS', 'ARROW', 'CONDOP', 'LPAREN', 'RPAREN', 'LBRACKET', 'RBRACKET', 'LBRACE', 'RBRACE', 'COMMA', 'PERIOD', 'SEMI', 'COLON', 'ELLIPSIS')
+    lex.py: 932:lex: literals = ''
+    lex.py: 933:lex: states   = {'INITIAL': 'inclusive'}
+    lex.py: 962:lex: Adding rule t_NEWLINE -> '\n+' (state 'INITIAL')
+    lex.py: 962:lex: Adding rule t_ID -> '[A-Za-z_][\w_]*' (state 'INITIAL')
+    lex.py: 962:lex: Adding rule t_comment -> '/\*(.|\n)*?\*/' (state 'INITIAL')
+    lex.py: 962:lex: Adding rule t_preprocessor -> '\#(.)*?\n' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_FCONST -> '((\d+)(\.\d+)(e(\+|-)?(\d+))? | (\d+)e(\+|-)?(\d+))([lL]|[fF])?' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_ICONST -> '\d+([uU]|[lL]|[uU][lL]|[lL][uU])?' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_CCONST -> '(L)?\'([^\\\n]|(\\.))*?\'' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_SCONST -> '\"([^\\\n]|(\\.))*?\"' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_ELLIPSIS -> '\.\.\.' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_PLUSPLUS -> '\+\+' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LOR -> '\|\|' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_RSHIFTEQUAL -> '>>=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_XOREQUAL -> '\^=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_TIMESEQUAL -> '\*=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LSHIFTEQUAL -> '<<=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_OREQUAL -> '\|=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_PLUSEQUAL -> '\+=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_MINUSMINUS -> '--' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_GE -> '>=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_RBRACKET -> '\]' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LE -> '<=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_RPAREN -> '\)' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_PERIOD -> '\.' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LBRACKET -> '\[' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LPAREN -> '\(' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_NE -> '!=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_PLUS -> '\+' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_OR -> '\|' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_MINUSEQUAL -> '-=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_ANDEQUAL -> '&=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_MODEQUAL -> '%=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LBRACE -> '\{' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_DIVEQUAL -> '/=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_ARROW -> '->' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_XOR -> '\^' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_TIMES -> '\*' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_CONDOP -> '\?' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_RSHIFT -> '>>' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LAND -> '&&' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LSHIFT -> '<<' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_EQ -> '==' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_RBRACE -> '\}' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_COLON -> ':' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_COMMA -> ',' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_DIVIDE -> '/' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LT -> '<' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_AND -> '&' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_NOT -> '~' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_SEMI -> ';' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_MINUS -> '-' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_MOD -> '%' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_EQUALS -> '=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LNOT -> '!' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_GT -> '>' (state 'INITIAL')
+    lex.py: 975:lex: ==== MASTER REGEXS FOLLOW ====
+    lex.py: 984:lex: state 'INITIAL' : regex[0] = '(?P<t_NEWLINE>\n+)|(?P<t_ID>[A-Za-z_][\w_]*)|(?P<t_comment>/\*(.|\n)*?\*/)|(?P<t_preprocessor>\#(.)*?\n)|(?P<t_FCONST>((\d+)(\.\d+)(e(\+|-)?(\d+))? | (\d+)e(\+|-)?(\d+))([lL]|[fF])?)|(?P<t_ICONST>\d+([uU]|[lL]|[uU][lL]|[lL][uU])?)|(?P<t_CCONST>(L)?\'([^\\\n]|(\\.))*?\')|(?P<t_SCONST>\"([^\\\n]|(\\.))*?\")|(?P<t_ELLIPSIS>\.\.\.)|(?P<t_PLUSPLUS>\+\+)|(?P<t_LOR>\|\|)|(?P<t_RSHIFTEQUAL>>>=)|(?P<t_XOREQUAL>\^=)|(?P<t_TIMESEQUAL>\*=)|(?P<t_LSHIFTEQUAL><<=)|(?P<t_OREQUAL>\|=)|(?P<t_PLUSEQUAL>\+=)|(?P<t_MINUSMINUS>--)|(?P<t_GE>>=)|(?P<t_RBRACKET>\])|(?P<t_LE><=)|(?P<t_RPAREN>\))|(?P<t_PERIOD>\.)|(?P<t_LBRACKET>\[)|(?P<t_LPAREN>\()|(?P<t_NE>!=)|(?P<t_PLUS>\+)|(?P<t_OR>\|)|(?P<t_MINUSEQUAL>-=)|(?P<t_ANDEQUAL>&=)|(?P<t_MODEQUAL>%=)|(?P<t_LBRACE>\{)|(?P<t_DIVEQUAL>/=)|(?P<t_ARROW>->)|(?P<t_XOR>\^)|(?P<t_TIMES>\*)|(?P<t_CONDOP>\?)|(?P<t_RSHIFT>>>)|(?P<t_LAND>&&)|(?P<t_LSHIFT><<)|(?P<t_EQ>==)|(?P<t_RBRACE>\})|(?P<t_COLON>:)|(?P<t_COMMA>,)|(?P<t_DIVIDE>/)|(?P<t_LT><)|(?P<t_AND>&)|(?P<t_NOT>~)|(?P<t_SEMI>;)|(?P<t_MINUS>-)|(?P<t_MOD>%)|(?P<t_EQUALS>=)|(?P<t_LNOT>!)|(?P<t_GT>>)'
+   yacc.py: 360:PLY: PARSE DEBUG START
+   yacc.py: 408:
+   yacc.py: 409:State  : 0
+   yacc.py: 433:Stack  : . LexToken(INT,'int',3,20)
+   yacc.py: 443:Action : Shift and goto state 31
+   yacc.py: 408:
+   yacc.py: 409:State  : 31
+   yacc.py: 433:Stack  : INT . LexToken(ID,'main',3,24)
+   yacc.py: 469:Action : Reduce rule [type_specifier -> INT] with ['int'] and goto state 13
+   yacc.py: 503:Result : <str @ 0x1fa2e48> ('int')
+   yacc.py: 408:
+   yacc.py: 409:State  : 13
+   yacc.py: 433:Stack  : type_specifier . LexToken(ID,'main',3,24)
+   yacc.py: 469:Action : Reduce rule [declaration_specifiers -> type_specifier] with ['int'] and goto state 24
+   yacc.py: 503:Result : <str @ 0x1fa2e48> ('int')
+   yacc.py: 408:
+   yacc.py: 409:State  : 24
+   yacc.py: 433:Stack  : declaration_specifiers . LexToken(ID,'main',3,24)
+   yacc.py: 443:Action : Shift and goto state 26
+   yacc.py: 408:
+   yacc.py: 409:State  : 26
+   yacc.py: 433:Stack  : declaration_specifiers ID . LexToken(LPAREN,'(',3,28)
+   yacc.py: 469:Action : Reduce rule [direct_declarator -> ID] with ['main'] and goto state 22
+   yacc.py: 503:Result : <str @ 0x1fb6640> ('main')
+   yacc.py: 408:
+   yacc.py: 409:State  : 22
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator . LexToken(LPAREN,'(',3,28)
+   yacc.py: 443:Action : Shift and goto state 48
+   yacc.py: 408:
+   yacc.py: 409:State  : 48
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN . LexToken(INT,'int',3,29)
+   yacc.py: 443:Action : Shift and goto state 31
+   yacc.py: 408:
+   yacc.py: 409:State  : 31
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN INT . LexToken(ID,'argc',3,33)
+   yacc.py: 469:Action : Reduce rule [type_specifier -> INT] with ['int'] and goto state 13
+   yacc.py: 503:Result : <str @ 0x1fa2e60> ('int')
+   yacc.py: 408:
+   yacc.py: 409:State  : 13
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN type_specifier . LexToken(ID,'argc',3,33)
+   yacc.py: 469:Action : Reduce rule [declaration_specifiers -> type_specifier] with ['int'] and goto state 111
+   yacc.py: 503:Result : <str @ 0x1fa2e60> ('int')
+   yacc.py: 408:
+   yacc.py: 409:State  : 111
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN declaration_specifiers . LexToken(ID,'argc',3,33)
+   yacc.py: 443:Action : Shift and goto state 26
+   yacc.py: 408:
+   yacc.py: 409:State  : 26
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN declaration_specifiers ID . LexToken(COMMA,',',3,37)
+   yacc.py: 469:Action : Reduce rule [direct_declarator -> ID] with ['argc'] and goto state 22
+   yacc.py: 503:Result : <str @ 0x1fb6660> ('argc')
+   yacc.py: 408:
+   yacc.py: 409:State  : 22
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN declaration_specifiers direct_declarator . LexToken(COMMA,',',3,37)
+   yacc.py: 469:Action : Reduce rule [declarator -> direct_declarator] with ['argc'] and goto state 207
+   yacc.py: 503:Result : <str @ 0x1fb6660> ('argc')
+   yacc.py: 408:
+   yacc.py: 409:State  : 207
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN declaration_specifiers declarator . LexToken(COMMA,',',3,37)
+   yacc.py: 469:Action : Reduce rule [parameter_declaration -> declaration_specifiers declarator] with ['int','argc'] and goto state 109
+   yacc.py: 503:Result : <instance @ 0x21eeaf8> (<c_ast.Node instance at 0x021EEAF8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 109
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN parameter_declaration . LexToken(COMMA,',',3,37)
+   yacc.py: 469:Action : Reduce rule [parameter_list -> parameter_declaration] with [<instance @ 0x21eeaf8>] and goto state 114
+   yacc.py: 503:Result : <instance @ 0x21eeaf8> (<c_ast.Node instance at 0x021EEAF8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 114
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN parameter_list . LexToken(COMMA,',',3,37)
+   yacc.py: 443:Action : Shift and goto state 213
+   yacc.py: 408:
+   yacc.py: 409:State  : 213
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN parameter_list COMMA . LexToken(CHAR,'char',3,39)
+   yacc.py: 443:Action : Shift and goto state 8
+   yacc.py: 408:
+   yacc.py: 409:State  : 8
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN parameter_list COMMA CHAR . LexToken(ID,'argv',3,44)
+   yacc.py: 469:Action : Reduce rule [type_specifier -> CHAR] with ['char'] and goto state 13
+   yacc.py: 503:Result : <str @ 0x1fb6480> ('char')
+   yacc.py: 408:
+   yacc.py: 409:State  : 13
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN parameter_list COMMA type_specifier . LexToken(ID,'argv',3,44)
+   yacc.py: 469:Action : Reduce rule [declaration_specifiers -> type_specifier] with ['char'] and goto state 111
+   yacc.py: 503:Result : <str @ 0x1fb6480> ('char')
+   yacc.py: 408:
+   yacc.py: 409:State  : 111
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN parameter_list COMMA declaration_specifiers . LexToken(ID,'argv',3,44)
+   yacc.py: 443:Action : Shift and goto state 26
+   yacc.py: 408:
+   yacc.py: 409:State  : 26
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN parameter_list COMMA declaration_specifiers ID . LexToken(LBRACKET,'[',3,48)
+   yacc.py: 469:Action : Reduce rule [direct_declarator -> ID] with ['argv'] and goto state 22
+   yacc.py: 503:Result : <str @ 0x1fb64a0> ('argv')
+   yacc.py: 408:
+   yacc.py: 409:State  : 22
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN parameter_list COMMA declaration_specifiers direct_declarator . LexToken(LBRACKET,'[',3,48)
+   yacc.py: 443:Action : Shift and goto state 47
+   yacc.py: 408:
+   yacc.py: 409:State  : 47
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN parameter_list COMMA declaration_specifiers direct_declarator LBRACKET . LexToken(RBRACKET,']',3,49)
+   yacc.py: 472:Action : Reduce rule [empty -> <empty>] with [] and goto state 92
+   yacc.py: 542:Result : <NoneType @ 0x1e224f84> (None)
+   yacc.py: 408:
+   yacc.py: 409:State  : 92
+   yacc.py: 428:Defaulted state 92: Reduce using 104
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN parameter_list COMMA declaration_specifiers direct_declarator LBRACKET empty . LexToken(RBRACKET,']',3,49)
+   yacc.py: 469:Action : Reduce rule [constant_expression_opt -> empty] with [None] and goto state 104
+   yacc.py: 503:Result : <NoneType @ 0x1e224f84> (None)
+   yacc.py: 408:
+   yacc.py: 409:State  : 104
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN parameter_list COMMA declaration_specifiers direct_declarator LBRACKET constant_expression_opt . LexToken(RBRACKET,']',3,49)
+   yacc.py: 443:Action : Shift and goto state 201
+   yacc.py: 408:
+   yacc.py: 409:State  : 201
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN parameter_list COMMA declaration_specifiers direct_declarator LBRACKET constant_expression_opt RBRACKET . LexToken(RPAREN,')',3,50)
+   yacc.py: 469:Action : Reduce rule [direct_declarator -> direct_declarator LBRACKET constant_expression_opt RBRACKET] with ['argv','[',None,']'] and goto state 22
+   yacc.py: 503:Result : <instance @ 0x21eead0> (<c_ast.Node instance at 0x021EEAD0>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 22
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN parameter_list COMMA declaration_specifiers direct_declarator . LexToken(RPAREN,')',3,50)
+   yacc.py: 469:Action : Reduce rule [declarator -> direct_declarator] with [<instance @ 0x21eead0>] and goto state 207
+   yacc.py: 503:Result : <instance @ 0x21eead0> (<c_ast.Node instance at 0x021EEAD0>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 207
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN parameter_list COMMA declaration_specifiers declarator . LexToken(RPAREN,')',3,50)
+   yacc.py: 469:Action : Reduce rule [parameter_declaration -> declaration_specifiers declarator] with ['char',<instance @ 0x21eead0>] and goto state 297
+   yacc.py: 503:Result : <instance @ 0x21eeb98> (<c_ast.Node instance at 0x021EEB98>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 297
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN parameter_list COMMA parameter_declaration . LexToken(RPAREN,')',3,50)
+   yacc.py: 469:Action : Reduce rule [parameter_list -> parameter_list COMMA parameter_declaration] with [<instance @ 0x21eeaf8>,',',<instance @ 0x21eeb98>] and goto state 114
+   yacc.py: 503:Result : <instance @ 0x21eeb20> (<c_ast.Node instance at 0x021EEB20>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 114
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN parameter_list . LexToken(RPAREN,')',3,50)
+   yacc.py: 469:Action : Reduce rule [parameter_type_list -> parameter_list] with [<instance @ 0x21eeb20>] and goto state 110
+   yacc.py: 503:Result : <instance @ 0x21eeb20> (<c_ast.Node instance at 0x021EEB20>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 110
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN parameter_type_list . LexToken(RPAREN,')',3,50)
+   yacc.py: 443:Action : Shift and goto state 202
+   yacc.py: 408:
+   yacc.py: 409:State  : 202
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator LPAREN parameter_type_list RPAREN . LexToken(LBRACE,'{',4,52)
+   yacc.py: 469:Action : Reduce rule [direct_declarator -> direct_declarator LPAREN parameter_type_list RPAREN] with ['main','(',<instance @ 0x21eeb20>,')'] and goto state 22
+   yacc.py: 503:Result : <instance @ 0x21eeb48> (<c_ast.Node instance at 0x021EEB48>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 22
+   yacc.py: 433:Stack  : declaration_specifiers direct_declarator . LexToken(LBRACE,'{',4,52)
+   yacc.py: 469:Action : Reduce rule [declarator -> direct_declarator] with [<instance @ 0x21eeb48>] and goto state 55
+   yacc.py: 503:Result : <instance @ 0x21eeb48> (<c_ast.Node instance at 0x021EEB48>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 55
+   yacc.py: 433:Stack  : declaration_specifiers declarator . LexToken(LBRACE,'{',4,52)
+   yacc.py: 443:Action : Shift and goto state 60
+   yacc.py: 408:
+   yacc.py: 409:State  : 60
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE . LexToken(ID,'printf',5,55)
+   yacc.py: 443:Action : Shift and goto state 149
+   yacc.py: 408:
+   yacc.py: 409:State  : 149
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE ID . LexToken(LPAREN,'(',5,61)
+   yacc.py: 469:Action : Reduce rule [primary_expression -> ID] with ['printf'] and goto state 96
+   yacc.py: 503:Result : <str @ 0x1e143e0> ('printf')
+   yacc.py: 408:
+   yacc.py: 409:State  : 96
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE primary_expression . LexToken(LPAREN,'(',5,61)
+   yacc.py: 469:Action : Reduce rule [postfix_expression -> primary_expression] with ['printf'] and goto state 86
+   yacc.py: 503:Result : <str @ 0x1e143e0> ('printf')
+   yacc.py: 408:
+   yacc.py: 409:State  : 86
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression . LexToken(LPAREN,'(',5,61)
+   yacc.py: 443:Action : Shift and goto state 181
+   yacc.py: 408:
+   yacc.py: 409:State  : 181
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN . LexToken(SCONST,'"%i"',5,62)
+   yacc.py: 443:Action : Shift and goto state 78
+   yacc.py: 408:
+   yacc.py: 409:State  : 78
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN SCONST . LexToken(COMMA,',',5,66)
+   yacc.py: 469:Action : Reduce rule [primary_expression -> SCONST] with ['"%i"'] and goto state 96
+   yacc.py: 503:Result : <str @ 0x1fb6680> ('"%i"')
+   yacc.py: 408:
+   yacc.py: 409:State  : 96
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN primary_expression . LexToken(COMMA,',',5,66)
+   yacc.py: 469:Action : Reduce rule [postfix_expression -> primary_expression] with ['"%i"'] and goto state 86
+   yacc.py: 503:Result : <str @ 0x1fb6680> ('"%i"')
+   yacc.py: 408:
+   yacc.py: 409:State  : 86
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN postfix_expression . LexToken(COMMA,',',5,66)
+   yacc.py: 469:Action : Reduce rule [unary_expression -> postfix_expression] with ['"%i"'] and goto state 130
+   yacc.py: 503:Result : <str @ 0x1fb6680> ('"%i"')
+   yacc.py: 408:
+   yacc.py: 409:State  : 130
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN unary_expression . LexToken(COMMA,',',5,66)
+   yacc.py: 469:Action : Reduce rule [cast_expression -> unary_expression] with ['"%i"'] and goto state 98
+   yacc.py: 503:Result : <str @ 0x1fb6680> ('"%i"')
+   yacc.py: 408:
+   yacc.py: 409:State  : 98
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN cast_expression . LexToken(COMMA,',',5,66)
+   yacc.py: 469:Action : Reduce rule [multiplicative_expression -> cast_expression] with ['"%i"'] and goto state 103
+   yacc.py: 503:Result : <str @ 0x1fb6680> ('"%i"')
+   yacc.py: 408:
+   yacc.py: 409:State  : 103
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN multiplicative_expression . LexToken(COMMA,',',5,66)
+   yacc.py: 469:Action : Reduce rule [additive_expression -> multiplicative_expression] with ['"%i"'] and goto state 77
+   yacc.py: 503:Result : <str @ 0x1fb6680> ('"%i"')
+   yacc.py: 408:
+   yacc.py: 409:State  : 77
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN additive_expression . LexToken(COMMA,',',5,66)
+   yacc.py: 469:Action : Reduce rule [shift_expression -> additive_expression] with ['"%i"'] and goto state 100
+   yacc.py: 503:Result : <str @ 0x1fb6680> ('"%i"')
+   yacc.py: 408:
+   yacc.py: 409:State  : 100
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN shift_expression . LexToken(COMMA,',',5,66)
+   yacc.py: 469:Action : Reduce rule [relational_expression -> shift_expression] with ['"%i"'] and goto state 88
+   yacc.py: 503:Result : <str @ 0x1fb6680> ('"%i"')
+   yacc.py: 408:
+   yacc.py: 409:State  : 88
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN relational_expression . LexToken(COMMA,',',5,66)
+   yacc.py: 469:Action : Reduce rule [equality_expression -> relational_expression] with ['"%i"'] and goto state 101
+   yacc.py: 503:Result : <str @ 0x1fb6680> ('"%i"')
+   yacc.py: 408:
+   yacc.py: 409:State  : 101
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN equality_expression . LexToken(COMMA,',',5,66)
+   yacc.py: 469:Action : Reduce rule [and_expression -> equality_expression] with ['"%i"'] and goto state 82
+   yacc.py: 503:Result : <str @ 0x1fb6680> ('"%i"')
+   yacc.py: 408:
+   yacc.py: 409:State  : 82
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN and_expression . LexToken(COMMA,',',5,66)
+   yacc.py: 469:Action : Reduce rule [exclusive_or_expression -> and_expression] with ['"%i"'] and goto state 76
+   yacc.py: 503:Result : <str @ 0x1fb6680> ('"%i"')
+   yacc.py: 408:
+   yacc.py: 409:State  : 76
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN exclusive_or_expression . LexToken(COMMA,',',5,66)
+   yacc.py: 469:Action : Reduce rule [inclusive_or_expression -> exclusive_or_expression] with ['"%i"'] and goto state 84
+   yacc.py: 503:Result : <str @ 0x1fb6680> ('"%i"')
+   yacc.py: 408:
+   yacc.py: 409:State  : 84
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN inclusive_or_expression . LexToken(COMMA,',',5,66)
+   yacc.py: 469:Action : Reduce rule [logical_and_expression -> inclusive_or_expression] with ['"%i"'] and goto state 99
+   yacc.py: 503:Result : <str @ 0x1fb6680> ('"%i"')
+   yacc.py: 408:
+   yacc.py: 409:State  : 99
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN logical_and_expression . LexToken(COMMA,',',5,66)
+   yacc.py: 469:Action : Reduce rule [logical_or_expression -> logical_and_expression] with ['"%i"'] and goto state 91
+   yacc.py: 503:Result : <str @ 0x1fb6680> ('"%i"')
+   yacc.py: 408:
+   yacc.py: 409:State  : 91
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN logical_or_expression . LexToken(COMMA,',',5,66)
+   yacc.py: 469:Action : Reduce rule [conditional_expression -> logical_or_expression] with ['"%i"'] and goto state 151
+   yacc.py: 503:Result : <str @ 0x1fb6680> ('"%i"')
+   yacc.py: 408:
+   yacc.py: 409:State  : 151
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN conditional_expression . LexToken(COMMA,',',5,66)
+   yacc.py: 469:Action : Reduce rule [assignment_expression -> conditional_expression] with ['"%i"'] and goto state 267
+   yacc.py: 503:Result : <str @ 0x1fb6680> ('"%i"')
+   yacc.py: 408:
+   yacc.py: 409:State  : 267
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN assignment_expression . LexToken(COMMA,',',5,66)
+   yacc.py: 469:Action : Reduce rule [argument_expression_list -> assignment_expression] with ['"%i"'] and goto state 268
+   yacc.py: 503:Result : <str @ 0x1fb6680> ('"%i"')
+   yacc.py: 408:
+   yacc.py: 409:State  : 268
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list . LexToken(COMMA,',',5,66)
+   yacc.py: 443:Action : Shift and goto state 319
+   yacc.py: 408:
+   yacc.py: 409:State  : 319
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list COMMA . LexToken(ID,'argc',5,68)
+   yacc.py: 443:Action : Shift and goto state 87
+   yacc.py: 408:
+   yacc.py: 409:State  : 87
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list COMMA ID . LexToken(RPAREN,')',5,72)
+   yacc.py: 469:Action : Reduce rule [primary_expression -> ID] with ['argc'] and goto state 96
+   yacc.py: 503:Result : <str @ 0x1fb6c00> ('argc')
+   yacc.py: 408:
+   yacc.py: 409:State  : 96
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list COMMA primary_expression . LexToken(RPAREN,')',5,72)
+   yacc.py: 469:Action : Reduce rule [postfix_expression -> primary_expression] with ['argc'] and goto state 86
+   yacc.py: 503:Result : <str @ 0x1fb6c00> ('argc')
+   yacc.py: 408:
+   yacc.py: 409:State  : 86
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list COMMA postfix_expression . LexToken(RPAREN,')',5,72)
+   yacc.py: 469:Action : Reduce rule [unary_expression -> postfix_expression] with ['argc'] and goto state 130
+   yacc.py: 503:Result : <str @ 0x1fb6c00> ('argc')
+   yacc.py: 408:
+   yacc.py: 409:State  : 130
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list COMMA unary_expression . LexToken(RPAREN,')',5,72)
+   yacc.py: 469:Action : Reduce rule [cast_expression -> unary_expression] with ['argc'] and goto state 98
+   yacc.py: 503:Result : <str @ 0x1fb6c00> ('argc')
+   yacc.py: 408:
+   yacc.py: 409:State  : 98
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list COMMA cast_expression . LexToken(RPAREN,')',5,72)
+   yacc.py: 469:Action : Reduce rule [multiplicative_expression -> cast_expression] with ['argc'] and goto state 103
+   yacc.py: 503:Result : <str @ 0x1fb6c00> ('argc')
+   yacc.py: 408:
+   yacc.py: 409:State  : 103
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list COMMA multiplicative_expression . LexToken(RPAREN,')',5,72)
+   yacc.py: 469:Action : Reduce rule [additive_expression -> multiplicative_expression] with ['argc'] and goto state 77
+   yacc.py: 503:Result : <str @ 0x1fb6c00> ('argc')
+   yacc.py: 408:
+   yacc.py: 409:State  : 77
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list COMMA additive_expression . LexToken(RPAREN,')',5,72)
+   yacc.py: 469:Action : Reduce rule [shift_expression -> additive_expression] with ['argc'] and goto state 100
+   yacc.py: 503:Result : <str @ 0x1fb6c00> ('argc')
+   yacc.py: 408:
+   yacc.py: 409:State  : 100
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list COMMA shift_expression . LexToken(RPAREN,')',5,72)
+   yacc.py: 469:Action : Reduce rule [relational_expression -> shift_expression] with ['argc'] and goto state 88
+   yacc.py: 503:Result : <str @ 0x1fb6c00> ('argc')
+   yacc.py: 408:
+   yacc.py: 409:State  : 88
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list COMMA relational_expression . LexToken(RPAREN,')',5,72)
+   yacc.py: 469:Action : Reduce rule [equality_expression -> relational_expression] with ['argc'] and goto state 101
+   yacc.py: 503:Result : <str @ 0x1fb6c00> ('argc')
+   yacc.py: 408:
+   yacc.py: 409:State  : 101
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list COMMA equality_expression . LexToken(RPAREN,')',5,72)
+   yacc.py: 469:Action : Reduce rule [and_expression -> equality_expression] with ['argc'] and goto state 82
+   yacc.py: 503:Result : <str @ 0x1fb6c00> ('argc')
+   yacc.py: 408:
+   yacc.py: 409:State  : 82
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list COMMA and_expression . LexToken(RPAREN,')',5,72)
+   yacc.py: 469:Action : Reduce rule [exclusive_or_expression -> and_expression] with ['argc'] and goto state 76
+   yacc.py: 503:Result : <str @ 0x1fb6c00> ('argc')
+   yacc.py: 408:
+   yacc.py: 409:State  : 76
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list COMMA exclusive_or_expression . LexToken(RPAREN,')',5,72)
+   yacc.py: 469:Action : Reduce rule [inclusive_or_expression -> exclusive_or_expression] with ['argc'] and goto state 84
+   yacc.py: 503:Result : <str @ 0x1fb6c00> ('argc')
+   yacc.py: 408:
+   yacc.py: 409:State  : 84
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list COMMA inclusive_or_expression . LexToken(RPAREN,')',5,72)
+   yacc.py: 469:Action : Reduce rule [logical_and_expression -> inclusive_or_expression] with ['argc'] and goto state 99
+   yacc.py: 503:Result : <str @ 0x1fb6c00> ('argc')
+   yacc.py: 408:
+   yacc.py: 409:State  : 99
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list COMMA logical_and_expression . LexToken(RPAREN,')',5,72)
+   yacc.py: 469:Action : Reduce rule [logical_or_expression -> logical_and_expression] with ['argc'] and goto state 91
+   yacc.py: 503:Result : <str @ 0x1fb6c00> ('argc')
+   yacc.py: 408:
+   yacc.py: 409:State  : 91
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list COMMA logical_or_expression . LexToken(RPAREN,')',5,72)
+   yacc.py: 469:Action : Reduce rule [conditional_expression -> logical_or_expression] with ['argc'] and goto state 151
+   yacc.py: 503:Result : <str @ 0x1fb6c00> ('argc')
+   yacc.py: 408:
+   yacc.py: 409:State  : 151
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list COMMA conditional_expression . LexToken(RPAREN,')',5,72)
+   yacc.py: 469:Action : Reduce rule [assignment_expression -> conditional_expression] with ['argc'] and goto state 335
+   yacc.py: 503:Result : <str @ 0x1fb6c00> ('argc')
+   yacc.py: 408:
+   yacc.py: 409:State  : 335
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list COMMA assignment_expression . LexToken(RPAREN,')',5,72)
+   yacc.py: 469:Action : Reduce rule [argument_expression_list -> argument_expression_list COMMA assignment_expression] with ['"%i"',',','argc'] and goto state 268
+   yacc.py: 503:Result : <instance @ 0x21eec10> (<c_ast.Node instance at 0x021EEC10>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 268
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list . LexToken(RPAREN,')',5,72)
+   yacc.py: 443:Action : Shift and goto state 318
+   yacc.py: 408:
+   yacc.py: 409:State  : 318
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression LPAREN argument_expression_list RPAREN . LexToken(SEMI,';',5,73)
+   yacc.py: 469:Action : Reduce rule [postfix_expression -> postfix_expression LPAREN argument_expression_list RPAREN] with ['printf','(',<instance @ 0x21eec10>,')'] and goto state 86
+   yacc.py: 503:Result : <instance @ 0x21eeaa8> (<c_ast.Node instance at 0x021EEAA8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 86
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE postfix_expression . LexToken(SEMI,';',5,73)
+   yacc.py: 469:Action : Reduce rule [unary_expression -> postfix_expression] with [<instance @ 0x21eeaa8>] and goto state 130
+   yacc.py: 503:Result : <instance @ 0x21eeaa8> (<c_ast.Node instance at 0x021EEAA8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 130
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE unary_expression . LexToken(SEMI,';',5,73)
+   yacc.py: 469:Action : Reduce rule [cast_expression -> unary_expression] with [<instance @ 0x21eeaa8>] and goto state 98
+   yacc.py: 503:Result : <instance @ 0x21eeaa8> (<c_ast.Node instance at 0x021EEAA8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 98
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE cast_expression . LexToken(SEMI,';',5,73)
+   yacc.py: 469:Action : Reduce rule [multiplicative_expression -> cast_expression] with [<instance @ 0x21eeaa8>] and goto state 103
+   yacc.py: 503:Result : <instance @ 0x21eeaa8> (<c_ast.Node instance at 0x021EEAA8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 103
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE multiplicative_expression . LexToken(SEMI,';',5,73)
+   yacc.py: 469:Action : Reduce rule [additive_expression -> multiplicative_expression] with [<instance @ 0x21eeaa8>] and goto state 77
+   yacc.py: 503:Result : <instance @ 0x21eeaa8> (<c_ast.Node instance at 0x021EEAA8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 77
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE additive_expression . LexToken(SEMI,';',5,73)
+   yacc.py: 469:Action : Reduce rule [shift_expression -> additive_expression] with [<instance @ 0x21eeaa8>] and goto state 100
+   yacc.py: 503:Result : <instance @ 0x21eeaa8> (<c_ast.Node instance at 0x021EEAA8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 100
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE shift_expression . LexToken(SEMI,';',5,73)
+   yacc.py: 469:Action : Reduce rule [relational_expression -> shift_expression] with [<instance @ 0x21eeaa8>] and goto state 88
+   yacc.py: 503:Result : <instance @ 0x21eeaa8> (<c_ast.Node instance at 0x021EEAA8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 88
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE relational_expression . LexToken(SEMI,';',5,73)
+   yacc.py: 469:Action : Reduce rule [equality_expression -> relational_expression] with [<instance @ 0x21eeaa8>] and goto state 101
+   yacc.py: 503:Result : <instance @ 0x21eeaa8> (<c_ast.Node instance at 0x021EEAA8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 101
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE equality_expression . LexToken(SEMI,';',5,73)
+   yacc.py: 469:Action : Reduce rule [and_expression -> equality_expression] with [<instance @ 0x21eeaa8>] and goto state 82
+   yacc.py: 503:Result : <instance @ 0x21eeaa8> (<c_ast.Node instance at 0x021EEAA8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 82
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE and_expression . LexToken(SEMI,';',5,73)
+   yacc.py: 469:Action : Reduce rule [exclusive_or_expression -> and_expression] with [<instance @ 0x21eeaa8>] and goto state 76
+   yacc.py: 503:Result : <instance @ 0x21eeaa8> (<c_ast.Node instance at 0x021EEAA8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 76
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE exclusive_or_expression . LexToken(SEMI,';',5,73)
+   yacc.py: 469:Action : Reduce rule [inclusive_or_expression -> exclusive_or_expression] with [<instance @ 0x21eeaa8>] and goto state 84
+   yacc.py: 503:Result : <instance @ 0x21eeaa8> (<c_ast.Node instance at 0x021EEAA8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 84
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE inclusive_or_expression . LexToken(SEMI,';',5,73)
+   yacc.py: 469:Action : Reduce rule [logical_and_expression -> inclusive_or_expression] with [<instance @ 0x21eeaa8>] and goto state 99
+   yacc.py: 503:Result : <instance @ 0x21eeaa8> (<c_ast.Node instance at 0x021EEAA8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 99
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE logical_and_expression . LexToken(SEMI,';',5,73)
+   yacc.py: 469:Action : Reduce rule [logical_or_expression -> logical_and_expression] with [<instance @ 0x21eeaa8>] and goto state 91
+   yacc.py: 503:Result : <instance @ 0x21eeaa8> (<c_ast.Node instance at 0x021EEAA8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 91
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE logical_or_expression . LexToken(SEMI,';',5,73)
+   yacc.py: 469:Action : Reduce rule [conditional_expression -> logical_or_expression] with [<instance @ 0x21eeaa8>] and goto state 151
+   yacc.py: 503:Result : <instance @ 0x21eeaa8> (<c_ast.Node instance at 0x021EEAA8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 151
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE conditional_expression . LexToken(SEMI,';',5,73)
+   yacc.py: 469:Action : Reduce rule [assignment_expression -> conditional_expression] with [<instance @ 0x21eeaa8>] and goto state 147
+   yacc.py: 503:Result : <instance @ 0x21eeaa8> (<c_ast.Node instance at 0x021EEAA8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 147
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE assignment_expression . LexToken(SEMI,';',5,73)
+   yacc.py: 469:Action : Reduce rule [expression -> assignment_expression] with [<instance @ 0x21eeaa8>] and goto state 135
+   yacc.py: 503:Result : <instance @ 0x21eeaa8> (<c_ast.Node instance at 0x021EEAA8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 135
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE expression . LexToken(SEMI,';',5,73)
+   yacc.py: 469:Action : Reduce rule [expression_opt -> expression] with [<instance @ 0x21eeaa8>] and goto state 126
+   yacc.py: 503:Result : <instance @ 0x21eeaa8> (<c_ast.Node instance at 0x021EEAA8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 126
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE expression_opt . LexToken(SEMI,';',5,73)
+   yacc.py: 443:Action : Shift and goto state 220
+   yacc.py: 408:
+   yacc.py: 409:State  : 220
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE expression_opt SEMI . LexToken(RETURN,'return',6,76)
+   yacc.py: 469:Action : Reduce rule [expression_statement -> expression_opt SEMI] with [<instance @ 0x21eeaa8>,';'] and goto state 123
+   yacc.py: 503:Result : <instance @ 0x21eec60> (<c_ast.Node instance at 0x021EEC60>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 123
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE expression_statement . LexToken(RETURN,'return',6,76)
+   yacc.py: 469:Action : Reduce rule [statement -> expression_statement] with [<instance @ 0x21eec60>] and goto state 140
+   yacc.py: 503:Result : <instance @ 0x21eec60> (<c_ast.Node instance at 0x021EEC60>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 140
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement . LexToken(RETURN,'return',6,76)
+   yacc.py: 469:Action : Reduce rule [statement_list -> statement] with [<instance @ 0x21eec60>] and goto state 134
+   yacc.py: 503:Result : <instance @ 0x21eec60> (<c_ast.Node instance at 0x021EEC60>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 134
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list . LexToken(RETURN,'return',6,76)
+   yacc.py: 443:Action : Shift and goto state 129
+   yacc.py: 408:
+   yacc.py: 409:State  : 129
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN . LexToken(ICONST,'0',6,83)
+   yacc.py: 443:Action : Shift and goto state 95
+   yacc.py: 408:
+   yacc.py: 409:State  : 95
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN ICONST . LexToken(SEMI,';',6,84)
+   yacc.py: 469:Action : Reduce rule [constant -> ICONST] with ['0'] and goto state 79
+   yacc.py: 503:Result : <str @ 0x1e273c8> ('0')
+   yacc.py: 408:
+   yacc.py: 409:State  : 79
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN constant . LexToken(SEMI,';',6,84)
+   yacc.py: 469:Action : Reduce rule [primary_expression -> constant] with ['0'] and goto state 96
+   yacc.py: 503:Result : <str @ 0x1e273c8> ('0')
+   yacc.py: 408:
+   yacc.py: 409:State  : 96
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN primary_expression . LexToken(SEMI,';',6,84)
+   yacc.py: 469:Action : Reduce rule [postfix_expression -> primary_expression] with ['0'] and goto state 86
+   yacc.py: 503:Result : <str @ 0x1e273c8> ('0')
+   yacc.py: 408:
+   yacc.py: 409:State  : 86
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN postfix_expression . LexToken(SEMI,';',6,84)
+   yacc.py: 469:Action : Reduce rule [unary_expression -> postfix_expression] with ['0'] and goto state 130
+   yacc.py: 503:Result : <str @ 0x1e273c8> ('0')
+   yacc.py: 408:
+   yacc.py: 409:State  : 130
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN unary_expression . LexToken(SEMI,';',6,84)
+   yacc.py: 469:Action : Reduce rule [cast_expression -> unary_expression] with ['0'] and goto state 98
+   yacc.py: 503:Result : <str @ 0x1e273c8> ('0')
+   yacc.py: 408:
+   yacc.py: 409:State  : 98
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN cast_expression . LexToken(SEMI,';',6,84)
+   yacc.py: 469:Action : Reduce rule [multiplicative_expression -> cast_expression] with ['0'] and goto state 103
+   yacc.py: 503:Result : <str @ 0x1e273c8> ('0')
+   yacc.py: 408:
+   yacc.py: 409:State  : 103
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN multiplicative_expression . LexToken(SEMI,';',6,84)
+   yacc.py: 469:Action : Reduce rule [additive_expression -> multiplicative_expression] with ['0'] and goto state 77
+   yacc.py: 503:Result : <str @ 0x1e273c8> ('0')
+   yacc.py: 408:
+   yacc.py: 409:State  : 77
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN additive_expression . LexToken(SEMI,';',6,84)
+   yacc.py: 469:Action : Reduce rule [shift_expression -> additive_expression] with ['0'] and goto state 100
+   yacc.py: 503:Result : <str @ 0x1e273c8> ('0')
+   yacc.py: 408:
+   yacc.py: 409:State  : 100
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN shift_expression . LexToken(SEMI,';',6,84)
+   yacc.py: 469:Action : Reduce rule [relational_expression -> shift_expression] with ['0'] and goto state 88
+   yacc.py: 503:Result : <str @ 0x1e273c8> ('0')
+   yacc.py: 408:
+   yacc.py: 409:State  : 88
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN relational_expression . LexToken(SEMI,';',6,84)
+   yacc.py: 469:Action : Reduce rule [equality_expression -> relational_expression] with ['0'] and goto state 101
+   yacc.py: 503:Result : <str @ 0x1e273c8> ('0')
+   yacc.py: 408:
+   yacc.py: 409:State  : 101
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN equality_expression . LexToken(SEMI,';',6,84)
+   yacc.py: 469:Action : Reduce rule [and_expression -> equality_expression] with ['0'] and goto state 82
+   yacc.py: 503:Result : <str @ 0x1e273c8> ('0')
+   yacc.py: 408:
+   yacc.py: 409:State  : 82
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN and_expression . LexToken(SEMI,';',6,84)
+   yacc.py: 469:Action : Reduce rule [exclusive_or_expression -> and_expression] with ['0'] and goto state 76
+   yacc.py: 503:Result : <str @ 0x1e273c8> ('0')
+   yacc.py: 408:
+   yacc.py: 409:State  : 76
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN exclusive_or_expression . LexToken(SEMI,';',6,84)
+   yacc.py: 469:Action : Reduce rule [inclusive_or_expression -> exclusive_or_expression] with ['0'] and goto state 84
+   yacc.py: 503:Result : <str @ 0x1e273c8> ('0')
+   yacc.py: 408:
+   yacc.py: 409:State  : 84
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN inclusive_or_expression . LexToken(SEMI,';',6,84)
+   yacc.py: 469:Action : Reduce rule [logical_and_expression -> inclusive_or_expression] with ['0'] and goto state 99
+   yacc.py: 503:Result : <str @ 0x1e273c8> ('0')
+   yacc.py: 408:
+   yacc.py: 409:State  : 99
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN logical_and_expression . LexToken(SEMI,';',6,84)
+   yacc.py: 469:Action : Reduce rule [logical_or_expression -> logical_and_expression] with ['0'] and goto state 91
+   yacc.py: 503:Result : <str @ 0x1e273c8> ('0')
+   yacc.py: 408:
+   yacc.py: 409:State  : 91
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN logical_or_expression . LexToken(SEMI,';',6,84)
+   yacc.py: 469:Action : Reduce rule [conditional_expression -> logical_or_expression] with ['0'] and goto state 151
+   yacc.py: 503:Result : <str @ 0x1e273c8> ('0')
+   yacc.py: 408:
+   yacc.py: 409:State  : 151
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN conditional_expression . LexToken(SEMI,';',6,84)
+   yacc.py: 469:Action : Reduce rule [assignment_expression -> conditional_expression] with ['0'] and goto state 147
+   yacc.py: 503:Result : <str @ 0x1e273c8> ('0')
+   yacc.py: 408:
+   yacc.py: 409:State  : 147
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN assignment_expression . LexToken(SEMI,';',6,84)
+   yacc.py: 469:Action : Reduce rule [expression -> assignment_expression] with ['0'] and goto state 135
+   yacc.py: 503:Result : <str @ 0x1e273c8> ('0')
+   yacc.py: 408:
+   yacc.py: 409:State  : 135
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN expression . LexToken(SEMI,';',6,84)
+   yacc.py: 469:Action : Reduce rule [expression_opt -> expression] with ['0'] and goto state 223
+   yacc.py: 503:Result : <str @ 0x1e273c8> ('0')
+   yacc.py: 408:
+   yacc.py: 409:State  : 223
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN expression_opt . LexToken(SEMI,';',6,84)
+   yacc.py: 443:Action : Shift and goto state 303
+   yacc.py: 408:
+   yacc.py: 409:State  : 303
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RETURN expression_opt SEMI . LexToken(RBRACE,'}',7,86)
+   yacc.py: 469:Action : Reduce rule [jump_statement -> RETURN expression_opt SEMI] with ['return','0',';'] and goto state 141
+   yacc.py: 503:Result : <instance @ 0x21eec38> (<c_ast.Node instance at 0x021EEC38>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 141
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list jump_statement . LexToken(RBRACE,'}',7,86)
+   yacc.py: 469:Action : Reduce rule [statement -> jump_statement] with [<instance @ 0x21eec38>] and goto state 238
+   yacc.py: 503:Result : <instance @ 0x21eec38> (<c_ast.Node instance at 0x021EEC38>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 238
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list statement . LexToken(RBRACE,'}',7,86)
+   yacc.py: 469:Action : Reduce rule [statement_list -> statement_list statement] with [<instance @ 0x21eec60>,<instance @ 0x21eec38>] and goto state 134
+   yacc.py: 503:Result : <instance @ 0x21eebc0> (<c_ast.Node instance at 0x021EEBC0>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 134
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list . LexToken(RBRACE,'}',7,86)
+   yacc.py: 443:Action : Shift and goto state 239
+   yacc.py: 408:
+   yacc.py: 409:State  : 239
+   yacc.py: 433:Stack  : declaration_specifiers declarator LBRACE statement_list RBRACE . $end
+   yacc.py: 469:Action : Reduce rule [compound_statement -> LBRACE statement_list RBRACE] with ['{',<instance @ 0x21eebc0>,'}'] and goto state 119
+   yacc.py: 503:Result : <instance @ 0x21eebe8> (<c_ast.Node instance at 0x021EEBE8>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 119
+   yacc.py: 433:Stack  : declaration_specifiers declarator compound_statement . $end
+   yacc.py: 469:Action : Reduce rule [function_definition -> declaration_specifiers declarator compound_statement] with ['int',<instance @ 0x21eeb48>,<instance @ 0x21eebe8>] and goto state 29
+   yacc.py: 503:Result : <instance @ 0x21eeb70> (<c_ast.Node instance at 0x021EEB70>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 29
+   yacc.py: 433:Stack  : function_definition . $end
+   yacc.py: 469:Action : Reduce rule [external_declaration -> function_definition] with [<instance @ 0x21eeb70>] and goto state 12
+   yacc.py: 503:Result : <instance @ 0x21eeb70> (<c_ast.Node instance at 0x021EEB70>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 12
+   yacc.py: 433:Stack  : external_declaration . $end
+   yacc.py: 469:Action : Reduce rule [translation_unit -> external_declaration] with [<instance @ 0x21eeb70>] and goto state 18
+   yacc.py: 503:Result : <instance @ 0x21eeb70> (<c_ast.Node instance at 0x021EEB70>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 18
+   yacc.py: 433:Stack  : translation_unit . $end
+   yacc.py: 564:Done   : Returning <instance @ 0x21eeb70> (<c_ast.Node instance at 0x021EEB70>)
+   yacc.py: 565:PLY: PARSE DEBUG END

@@ -1,0 +1,961 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"str",
+				"struct_declaration_list"
+			],
+			[
+				"struct",
+				"struct_declaration_list"
+			],
+			[
+				"stru",
+				"struct_or_union"
+			],
+			[
+				"type",
+				"type_qualifier"
+			],
+			[
+				"sto",
+				"storage_class_specifier"
+			],
+			[
+				"decla",
+				"declaration_specifiers"
+			],
+			[
+				"declara",
+				"declaration_specifiers"
+			],
+			[
+				"exter",
+				"external_declaration"
+			],
+			[
+				"transla",
+				"translation_unit"
+			],
+			[
+				"function",
+				"function_definition"
+			],
+			[
+				"hex",
+				"hexlify〔module〕"
+			],
+			[
+				"r1",
+				"r1_l〔variable〕"
+			],
+			[
+				"r3",
+				"r3_l〔variable〕"
+			],
+			[
+				"r2",
+				"r2_l〔variable〕"
+			],
+			[
+				"bin",
+				"binstr_to_list〔function〕"
+			],
+			[
+				"get",
+				"get_r〔function〕"
+			],
+			[
+				"lm",
+				"lmhash〔module〕"
+			],
+			[
+				"ha",
+				"hash〔module〕"
+			],
+			[
+				"SOCK",
+				"SOCK_STREAM〔variable〕"
+			],
+			[
+				"text",
+				"text-align: 〔property〕"
+			],
+			[
+				"padd",
+				"padding-top: 〔property〕"
+			],
+			[
+				"fon",
+				"font-size: 〔property〕"
+			],
+			[
+				"ba",
+				"background: 〔property〕"
+			],
+			[
+				"w",
+				"write〔function〕"
+			],
+			[
+				"out",
+				"out_file〔variable〕"
+			],
+			[
+				"wri",
+				"writelines〔function〕"
+			],
+			[
+				"strin",
+				"strings〔function〕"
+			],
+			[
+				"c",
+				"class	Attr"
+			],
+			[
+				"t",
+				"table	Tag"
+			],
+			[
+				"wi",
+				"max-width"
+			],
+			[
+				"con",
+				"container"
+			],
+			[
+				"h",
+				"h1	Tag"
+			],
+			[
+				"nav",
+				"navbar"
+			],
+			[
+				"com",
+				"comments"
+			],
+			[
+				"pro",
+				"profiles"
+			],
+			[
+				"loa",
+				"load_more"
+			],
+			[
+				"on",
+				"on_load"
+			],
+			[
+				"vk",
+				"vk_comments"
+			],
+			[
+				"create",
+				"createElement"
+			],
+			[
+				"ap",
+				"appendChild"
+			],
+			[
+				"user",
+				"userId"
+			],
+			[
+				"a",
+				"appendChild"
+			],
+			[
+				"user_",
+				"user_photo_url"
+			],
+			[
+				"te",
+				"text-align"
+			],
+			[
+				"if",
+				"ifmain	if __name__ == '__main__'"
+			],
+			[
+				"x",
+				"x_offset"
+			],
+			[
+				"x_",
+				"x_offset_temp"
+			],
+			[
+				"sampl",
+				"samplesDelayMS"
+			],
+			[
+				"read",
+				"readXYZ"
+			],
+			[
+				"MAG",
+				"MAG3110_OUT_X_MSB"
+			],
+			[
+				"int",
+				"int16_t"
+			],
+			[
+				"delay",
+				"delayMicroseconds"
+			],
+			[
+				"begin",
+				"beginTransmission"
+			],
+			[
+				"req",
+				"requestFrom"
+			],
+			[
+				"address",
+				"addressh"
+			],
+			[
+				"de",
+				"define"
+			],
+			[
+				"Ma",
+				"MAG3110"
+			],
+			[
+				"en",
+				"endTransmission"
+			],
+			[
+				"ge",
+				"getOrientation"
+			],
+			[
+				"_",
+				"_xPin"
+			],
+			[
+				"A",
+				"AvgCaliSamples"
+			],
+			[
+				"sa",
+				"samples_delay"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "clex.py",
+			"settings":
+			{
+				"buffer_size": 3922,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "# -----------------------------------------------------------------------------\n# cparse.py\n#\n# Simple parser for ANSI C.  Based on the grammar in K&R, 2nd Ed.\n# -----------------------------------------------------------------------------\n\nimport sys\nimport clex\nimport ply.yacc as yacc\nfrom c_ast import *\n\n# Get the token map\ntokens = clex.tokens\n\n# translation-unit:\n\ndef p_translation_unit_1(p):\n    'translation_unit : external_declaration'\n    p[0] = create_node('translation_unit', p[1])\n\ndef p_translation_unit_2(p):\n    'translation_unit : translation_unit external_declaration'\n    p[0] = create_node('translation_unit', [p[1], p[2]])\n\n# external-declaration:\n\ndef p_external_declaration_1(p):\n    'external_declaration : function_definition'\n    p[0] = create_node('external_declaration', p[1])\n\ndef p_external_declaration_2(p):\n    'external_declaration : declaration'\n    p[0] = create_node('external_declaration', p[1])\n\n# function-definition:\n\ndef p_function_definition_1(p):\n    'function_definition : declaration_specifiers declarator declaration_list compound_statement'\n    p[0] = create_node('function_definition' , [p[1], p[2], p[3], p[4]])\n\ndef p_function_definition_2(p):\n    'function_definition : declarator declaration_list compound_statement'\n    p[0] = create_node('function_definition', [p[1], p[2], p[3]])\n\ndef p_function_definition_3(p):\n    'function_definition : declarator compound_statement'\n    p[0] = create_node('function_definition', [p[1], p[2]])\n\ndef p_function_definition_4(p):\n    'function_definition : declaration_specifiers declarator compound_statement'\n    p[0] = create_node('function_definition', [p[1], p[2], p[3]])\n\n# declaration:\n\ndef p_declaration_1(p):\n    'declaration : declaration_specifiers init_declarator_list SEMI'\n    p[0] = create_node('declaration', [p[1], p[2]])\n\ndef p_declaration_2(p):\n    'declaration : declaration_specifiers SEMI'\n    p[0] = create_node('declaration', [p[1], p[2]])\n\n# declaration-list:\n\ndef p_declaration_list_1(p):\n    'declaration_list : declaration'\n    p[0] = create_node('declaration_list', p[0])\n\ndef p_declaration_list_2(p):\n    'declaration_list : declaration_list declaration '\n    p[0] = create_node('declaration_list', [p[1], p[2]])\n\n# declaration-specifiers\ndef p_declaration_specifiers_1(p):\n    'declaration_specifiers : storage_class_specifier declaration_specifiers'\n    p[0] = create_node('declaration_specifiers', [p[1], p[2]])\n\ndef p_declaration_specifiers_2(p):\n    'declaration_specifiers : type_specifier declaration_specifiers'\n    p[0] = create_node('declaration_specifiers', [p[1], p[2]])\n\ndef p_declaration_specifiers_3(p):\n    'declaration_specifiers : type_qualifier declaration_specifiers'\n    p[0] = create_node('declaration_specifiers', [p[1], p[2]])\n\ndef p_declaration_specifiers_4(p):\n    'declaration_specifiers : storage_class_specifier'\n    p[0] = create_node('declaration_specifiers', p[1])\n\ndef p_declaration_specifiers_5(p):\n    'declaration_specifiers : type_specifier'\n    p[0] = create_node('declaration_specifiers', p[1])\n\ndef p_declaration_specifiers_6(p):\n    'declaration_specifiers : type_qualifier'\n    p[0] = create_node('declaration_specifiers', p[1])\n\n# storage-class-specifier\ndef p_storage_class_specifier(p):\n    '''storage_class_specifier : AUTO\n                               | REGISTER\n                               | STATIC\n                               | EXTERN\n                               | TYPEDEF\n                               '''\n    p[0] = create_node('storage_class_specifier', p[1])\n\n# type-specifier:\ndef p_type_specifier(p):\n    '''type_specifier : VOID\n                      | CHAR\n                      | SHORT\n                      | INT\n                      | LONG\n                      | FLOAT\n                      | DOUBLE\n                      | SIGNED\n                      | UNSIGNED\n                      | struct_or_union_specifier\n                      | enum_specifier\n                      | TYPEID\n                      '''\n    p[0] = create_node('type_specifier', p[1])\n\n# type-qualifier:\ndef p_type_qualifier(p):\n    '''type_qualifier : CONST\n                      | VOLATILE'''\n    p[0] = create_node('type_qualifier', p[1])\n\n# struct-or-union-specifier\n\ndef p_struct_or_union_specifier_1(p):\n    'struct_or_union_specifier : struct_or_union ID LBRACE struct_declaration_list RBRACE'\n    p[0] = create_node('struct_or_union_specifier', [p[1], p[2], p[3], p[4]])\n\ndef p_struct_or_union_specifier_2(p):\n    'struct_or_union_specifier : struct_or_union LBRACE struct_declaration_list RBRACE'\n    p[0] = create_node('struct_or_union_specifier', [p[1], p[2], p[3], p[4]])\n\ndef p_struct_or_union_specifier_3(p):\n    'struct_or_union_specifier : struct_or_union ID'\n    p[0] = create_node('struct_or_union_specifier', [p[1], p[2]])\n\n# struct-or-union:\ndef p_struct_or_union(p):\n    '''struct_or_union : STRUCT\n                       | UNION\n                       '''\n    p[0] = create_node('struct_or_union', p[1])\n\n# struct-declaration-list:\n\ndef p_struct_declaration_list_1(p):\n    'struct_declaration_list : struct_declaration'\n    p[0] = create_node('struct_declaration_list', p[1])\n\ndef p_struct_declaration_list_2(p):\n    'struct_declaration_list : struct_declaration_list struct_declaration'\n    p[0] = create_node('struct_declaration_list', [p[1], p[2]])\n\n# init-declarator-list:\n\ndef p_init_declarator_list_1(p):\n    'init_declarator_list : init_declarator'\n    p[0] = create_node()\n\ndef p_init_declarator_list_2(p):\n    'init_declarator_list : init_declarator_list COMMA init_declarator'\n    p[0] = create_node()\n\n# init-declarator\n\ndef p_init_declarator_1(p):\n    'init_declarator : declarator'\n    p[0] = create_node()\n\ndef p_init_declarator_2(p):\n    'init_declarator : declarator EQUALS initializer'\n    p[0] = create_node()\n\n# struct-declaration:\n\ndef p_struct_declaration(p):\n    'struct_declaration : specifier_qualifier_list struct_declarator_list SEMI'\n    p[0] = create_node()\n\n# specifier-qualifier-list:\n\ndef p_specifier_qualifier_list_1(p):\n    'specifier_qualifier_list : type_specifier specifier_qualifier_list'\n    p[0] = create_node()\n\ndef p_specifier_qualifier_list_2(p):\n    'specifier_qualifier_list : type_specifier'\n    p[0] = create_node()\n\ndef p_specifier_qualifier_list_3(p):\n    'specifier_qualifier_list : type_qualifier specifier_qualifier_list'\n    p[0] = create_node()\n\ndef p_specifier_qualifier_list_4(p):\n    'specifier_qualifier_list : type_qualifier'\n    p[0] = create_node()\n\n# struct-declarator-list:\n\ndef p_struct_declarator_list_1(p):\n    'struct_declarator_list : struct_declarator'\n    p[0] = create_node()\n\ndef p_struct_declarator_list_2(p):\n    'struct_declarator_list : struct_declarator_list COMMA struct_declarator'\n    p[0] = create_node()\n\n# struct-declarator:\n\ndef p_struct_declarator_1(p):\n    'struct_declarator : declarator'\n    p[0] = create_node()\n\ndef p_struct_declarator_2(p):\n    'struct_declarator : declarator COLON constant_expression'\n    p[0] = create_node()\n\ndef p_struct_declarator_3(p):\n    'struct_declarator : COLON constant_expression'\n    p[0] = create_node()\n\n# enum-specifier:\n\ndef p_enum_specifier_1(p):\n    'enum_specifier : ENUM ID LBRACE enumerator_list RBRACE'\n    p[0] = create_node()\n\ndef p_enum_specifier_2(p):\n    'enum_specifier : ENUM LBRACE enumerator_list RBRACE'\n    p[0] = create_node()\n\ndef p_enum_specifier_3(p):\n    'enum_specifier : ENUM ID'\n    p[0] = create_node()\n\n# enumerator_list:\ndef p_enumerator_list_1(p):\n    'enumerator_list : enumerator'\n    p[0] = create_node()\n\ndef p_enumerator_list_2(p):\n    'enumerator_list : enumerator_list COMMA enumerator'\n    p[0] = create_node()\n\n# enumerator:\ndef p_enumerator_1(p):\n    'enumerator : ID'\n    p[0] = create_node()\n\ndef p_enumerator_2(p):\n    'enumerator : ID EQUALS constant_expression'\n    p[0] = create_node()\n\n# declarator:\n\ndef p_declarator_1(p):\n    'declarator : pointer direct_declarator'\n    p[0] = create_node()\n\ndef p_declarator_2(p):\n    'declarator : direct_declarator'\n    p[0] = create_node()\n\n# direct-declarator:\n\ndef p_direct_declarator_1(p):\n    'direct_declarator : ID'\n    p[0] = create_node()\n\ndef p_direct_declarator_2(p):\n    'direct_declarator : LPAREN declarator RPAREN'\n    p[0] = create_node()\n\ndef p_direct_declarator_3(p):\n    'direct_declarator : direct_declarator LBRACKET constant_expression_opt RBRACKET'\n    p[0] = create_node()\n\ndef p_direct_declarator_4(p):\n    'direct_declarator : direct_declarator LPAREN parameter_type_list RPAREN '\n    p[0] = create_node()\n\ndef p_direct_declarator_5(p):\n    'direct_declarator : direct_declarator LPAREN identifier_list RPAREN '\n    p[0] = create_node()\n\ndef p_direct_declarator_6(p):\n    'direct_declarator : direct_declarator LPAREN RPAREN '\n    p[0] = create_node()\n\n# pointer:\ndef p_pointer_1(p):\n    'pointer : TIMES type_qualifier_list'\n    p[0] = create_node()\n\ndef p_pointer_2(p):\n    'pointer : TIMES'\n    p[0] = create_node()\n\ndef p_pointer_3(p):\n    'pointer : TIMES type_qualifier_list pointer'\n    p[0] = create_node()\n\ndef p_pointer_4(p):\n    'pointer : TIMES pointer'\n    p[0] = create_node()\n\n# type-qualifier-list:\n\ndef p_type_qualifier_list_1(p):\n    'type_qualifier_list : type_qualifier'\n    p[0] = create_node()\n\ndef p_type_qualifier_list_2(p):\n    'type_qualifier_list : type_qualifier_list type_qualifier'\n    p[0] = create_node()\n\n# parameter-type-list:\n\ndef p_parameter_type_list_1(p):\n    'parameter_type_list : parameter_list'\n    p[0] = create_node()\n\ndef p_parameter_type_list_2(p):\n    'parameter_type_list : parameter_list COMMA ELLIPSIS'\n    p[0] = create_node()\n\n# parameter-list:\n\ndef p_parameter_list_1(p):\n    'parameter_list : parameter_declaration'\n    p[0] = create_node()\n\ndef p_parameter_list_2(p):\n    'parameter_list : parameter_list COMMA parameter_declaration'\n    p[0] = create_node()\n\n# parameter-declaration:\ndef p_parameter_declaration_1(p):\n    'parameter_declaration : declaration_specifiers declarator'\n    p[0] = create_node()\n\ndef p_parameter_declaration_2(p):\n    'parameter_declaration : declaration_specifiers abstract_declarator_opt'\n    p[0] = create_node()\n\n# identifier-list:\ndef p_identifier_list_1(p):\n    'identifier_list : ID'\n    p[0] = create_node()\n\ndef p_identifier_list_2(p):\n    'identifier_list : identifier_list COMMA ID'\n    p[0] = create_node()\n\n# initializer:\n\ndef p_initializer_1(p):\n    'initializer : assignment_expression'\n    p[0] = create_node()\n\ndef p_initializer_2(p):\n    '''initializer : LBRACE initializer_list RBRACE\n                   | LBRACE initializer_list COMMA RBRACE'''\n    p[0] = create_node()\n\n# initializer-list:\n\ndef p_initializer_list_1(p):\n    'initializer_list : initializer'\n    p[0] = create_node()\n\ndef p_initializer_list_2(p):\n    'initializer_list : initializer_list COMMA initializer'\n    p[0] = create_node()\n\n# type-name:\n\ndef p_type_name(p):\n    'type_name : specifier_qualifier_list abstract_declarator_opt'\n    p[0] = create_node()\n\ndef p_abstract_declarator_opt_1(p):\n    'abstract_declarator_opt : empty'\n    p[0] = create_node()\n\ndef p_abstract_declarator_opt_2(p):\n    'abstract_declarator_opt : abstract_declarator'\n    p[0] = create_node()\n\n# abstract-declarator:\n\ndef p_abstract_declarator_1(p):\n    'abstract_declarator : pointer '\n    p[0] = create_node()\n\ndef p_abstract_declarator_2(p):\n    'abstract_declarator : pointer direct_abstract_declarator'\n    p[0] = create_node()\n\ndef p_abstract_declarator_3(p):\n    'abstract_declarator : direct_abstract_declarator'\n    p[0] = create_node()\n\n# direct-abstract-declarator:\n\ndef p_direct_abstract_declarator_1(p):\n    'direct_abstract_declarator : LPAREN abstract_declarator RPAREN'\n    p[0] = create_node()\n\ndef p_direct_abstract_declarator_2(p):\n    'direct_abstract_declarator : direct_abstract_declarator LBRACKET constant_expression_opt RBRACKET'\n    p[0] = create_node()\n\ndef p_direct_abstract_declarator_3(p):\n    'direct_abstract_declarator : LBRACKET constant_expression_opt RBRACKET'\n    p[0] = create_node()\n\ndef p_direct_abstract_declarator_4(p):\n    'direct_abstract_declarator : direct_abstract_declarator LPAREN parameter_type_list_opt RPAREN'\n    p[0] = create_node()\n\ndef p_direct_abstract_declarator_5(p):\n    'direct_abstract_declarator : LPAREN parameter_type_list_opt RPAREN'\n    p[0] = create_node()\n\n# Optional fields in abstract declarators\n\ndef p_constant_expression_opt_1(p):\n    'constant_expression_opt : empty'\n    p[0] = create_node()\n\ndef p_constant_expression_opt_2(p):\n    'constant_expression_opt : constant_expression'\n    p[0] = create_node()\n\ndef p_parameter_type_list_opt_1(p):\n    'parameter_type_list_opt : empty'\n    p[0] = create_node()\n\ndef p_parameter_type_list_opt_2(p):\n    'parameter_type_list_opt : parameter_type_list'\n    p[0] = create_node()\n\n# statement:\n\ndef p_statement(p):\n    '''\n    statement : labeled_statement\n              | expression_statement\n              | compound_statement\n              | selection_statement\n              | iteration_statement\n              | jump_statement\n              '''\n    p[0] = create_node()\n\n# labeled-statement:\n\ndef p_labeled_statement_1(p):\n    'labeled_statement : ID COLON statement'\n    p[0] = create_node()\n\ndef p_labeled_statement_2(p):\n    'labeled_statement : CASE constant_expression COLON statement'\n    p[0] = create_node()\n\ndef p_labeled_statement_3(p):\n    'labeled_statement : DEFAULT COLON statement'\n    p[0] = create_node()\n\n# expression-statement:\ndef p_expression_statement(p):\n    'expression_statement : expression_opt SEMI'\n    p[0] = create_node()\n\n# compound-statement:\n\ndef p_compound_statement_1(p):\n    'compound_statement : LBRACE declaration_list statement_list RBRACE'\n    p[0] = create_node()\n\ndef p_compound_statement_2(p):\n    'compound_statement : LBRACE statement_list RBRACE'\n    p[0] = create_node()\n\ndef p_compound_statement_3(p):\n    'compound_statement : LBRACE declaration_list RBRACE'\n    p[0] = create_node()\n\ndef p_compound_statement_4(p):\n    'compound_statement : LBRACE RBRACE'\n    p[0] = create_node()\n\n# statement-list:\n\ndef p_statement_list_1(p):\n    'statement_list : statement'\n    p[0] = create_node()\n\ndef p_statement_list_2(p):\n    'statement_list : statement_list statement'\n    p[0] = create_node()\n\n# selection-statement\n\ndef p_selection_statement_1(p):\n    'selection_statement : IF LPAREN expression RPAREN statement'\n    p[0] = create_node()\n\ndef p_selection_statement_2(p):\n    'selection_statement : IF LPAREN expression RPAREN statement ELSE statement '\n    p[0] = create_node()\n\ndef p_selection_statement_3(p):\n    'selection_statement : SWITCH LPAREN expression RPAREN statement '\n    p[0] = create_node()\n\n# iteration_statement:\n\ndef p_iteration_statement_1(p):\n    'iteration_statement : WHILE LPAREN expression RPAREN statement'\n    p[0] = create_node()\n\ndef p_iteration_statement_2(p):\n    'iteration_statement : FOR LPAREN expression_opt SEMI expression_opt SEMI expression_opt RPAREN statement '\n    p[0] = create_node()\n\ndef p_iteration_statement_3(p):\n    'iteration_statement : DO statement WHILE LPAREN expression RPAREN SEMI'\n    p[0] = create_node()\n\n# jump_statement:\n\ndef p_jump_statement_1(p):\n    'jump_statement : GOTO ID SEMI'\n    p[0] = create_node()\n\ndef p_jump_statement_2(p):\n    'jump_statement : CONTINUE SEMI'\n    p[0] = create_node()\n\ndef p_jump_statement_3(p):\n    'jump_statement : BREAK SEMI'\n    p[0] = create_node()\n\ndef p_jump_statement_4(p):\n    'jump_statement : RETURN expression_opt SEMI'\n    p[0] = create_node()\n\ndef p_expression_opt_1(p):\n    'expression_opt : empty'\n    p[0] = create_node()\n\ndef p_expression_opt_2(p):\n    'expression_opt : expression'\n    p[0] = create_node()\n\n# expression:\ndef p_expression_1(p):\n    'expression : assignment_expression'\n    p[0] = create_node()\n\ndef p_expression_2(p):\n    'expression : expression COMMA assignment_expression'\n    p[0] = create_node()\n\n# assigment_expression:\ndef p_assignment_expression_1(p):\n    'assignment_expression : conditional_expression'\n    p[0] = create_node()\n\ndef p_assignment_expression_2(p):\n    'assignment_expression : unary_expression assignment_operator assignment_expression'\n    p[0] = create_node()\n\n# assignment_operator:\ndef p_assignment_operator(p):\n    '''\n    assignment_operator : EQUALS\n                        | TIMESEQUAL\n                        | DIVEQUAL\n                        | MODEQUAL\n                        | PLUSEQUAL\n                        | MINUSEQUAL\n                        | LSHIFTEQUAL\n                        | RSHIFTEQUAL\n                        | ANDEQUAL\n                        | OREQUAL\n                        | XOREQUAL\n                        '''\n    p[0] = create_node()\n\n# conditional-expression\ndef p_conditional_expression_1(p):\n    'conditional_expression : logical_or_expression'\n    p[0] = create_node()\n\ndef p_conditional_expression_2(p):\n    'conditional_expression : logical_or_expression CONDOP expression COLON conditional_expression '\n    p[0] = create_node()\n\n# constant-expression\n\ndef p_constant_expression(p):\n    'constant_expression : conditional_expression'\n    p[0] = create_node()\n\n# logical-or-expression\n\ndef p_logical_or_expression_1(p):\n    'logical_or_expression : logical_and_expression'\n    p[0] = create_node()\n\ndef p_logical_or_expression_2(p):\n    'logical_or_expression : logical_or_expression LOR logical_and_expression'\n    p[0] = create_node()\n\n# logical-and-expression\n\ndef p_logical_and_expression_1(p):\n    'logical_and_expression : inclusive_or_expression'\n    p[0] = create_node()\n\ndef p_logical_and_expression_2(p):\n    'logical_and_expression : logical_and_expression LAND inclusive_or_expression'\n    p[0] = create_node()\n\n# inclusive-or-expression:\n\ndef p_inclusive_or_expression_1(p):\n    'inclusive_or_expression : exclusive_or_expression'\n    p[0] = create_node()\n\ndef p_inclusive_or_expression_2(p):\n    'inclusive_or_expression : inclusive_or_expression OR exclusive_or_expression'\n    p[0] = create_node()\n\n# exclusive-or-expression:\n\ndef p_exclusive_or_expression_1(p):\n    'exclusive_or_expression :  and_expression'\n    p[0] = create_node()\n\ndef p_exclusive_or_expression_2(p):\n    'exclusive_or_expression :  exclusive_or_expression XOR and_expression'\n    p[0] = create_node()\n\n# AND-expression\n\ndef p_and_expression_1(p):\n    'and_expression : equality_expression'\n    p[0] = create_node()\n\ndef p_and_expression_2(p):\n    'and_expression : and_expression AND equality_expression'\n    p[0] = create_node()\n\n\n# equality-expression:\ndef p_equality_expression_1(p):\n    'equality_expression : relational_expression'\n    p[0] = create_node()\n\ndef p_equality_expression_2(p):\n    'equality_expression : equality_expression EQ relational_expression'\n    p[0] = create_node()\n\ndef p_equality_expression_3(p):\n    'equality_expression : equality_expression NE relational_expression'\n    p[0] = create_node()\n\n\n# relational-expression:\ndef p_relational_expression_1(p):\n    'relational_expression : shift_expression'\n    p[0] = create_node()\n\ndef p_relational_expression_2(p):\n    'relational_expression : relational_expression LT shift_expression'\n    p[0] = create_node()\n\ndef p_relational_expression_3(p):\n    'relational_expression : relational_expression GT shift_expression'\n    p[0] = create_node()\n\ndef p_relational_expression_4(p):\n    'relational_expression : relational_expression LE shift_expression'\n    p[0] = create_node()\n\ndef p_relational_expression_5(p):\n    'relational_expression : relational_expression GE shift_expression'\n    p[0] = create_node()\n\n# shift-expression\n\ndef p_shift_expression_1(p):\n    'shift_expression : additive_expression'\n    p[0] = create_node()\n\ndef p_shift_expression_2(p):\n    'shift_expression : shift_expression LSHIFT additive_expression'\n    p[0] = create_node()\n\ndef p_shift_expression_3(p):\n    'shift_expression : shift_expression RSHIFT additive_expression'\n    p[0] = create_node()\n\n# additive-expression\n\ndef p_additive_expression_1(p):\n    'additive_expression : multiplicative_expression'\n    p[0] = create_node()\n\ndef p_additive_expression_2(p):\n    'additive_expression : additive_expression PLUS multiplicative_expression'\n    p[0] = create_node()\n\ndef p_additive_expression_3(p):\n    'additive_expression : additive_expression MINUS multiplicative_expression'\n    p[0] = create_node()\n\n# multiplicative-expression\n\ndef p_multiplicative_expression_1(p):\n    'multiplicative_expression : cast_expression'\n    p[0] = create_node()\n\ndef p_multiplicative_expression_2(p):\n    'multiplicative_expression : multiplicative_expression TIMES cast_expression'\n    p[0] = create_node()\n\ndef p_multiplicative_expression_3(p):\n    'multiplicative_expression : multiplicative_expression DIVIDE cast_expression'\n    p[0] = create_node()\n\ndef p_multiplicative_expression_4(p):\n    'multiplicative_expression : multiplicative_expression MOD cast_expression'\n    p[0] = create_node()\n\n# cast-expression:\n\ndef p_cast_expression_1(p):\n    'cast_expression : unary_expression'\n    p[0] = create_node()\n\ndef p_cast_expression_2(p):\n    'cast_expression : LPAREN type_name RPAREN cast_expression'\n    p[0] = create_node()\n\n# unary-expression:\ndef p_unary_expression_1(p):\n    'unary_expression : postfix_expression'\n    p[0] = create_node()\n\ndef p_unary_expression_2(p):\n    'unary_expression : PLUSPLUS unary_expression'\n    p[0] = create_node()\n\ndef p_unary_expression_3(p):\n    'unary_expression : MINUSMINUS unary_expression'\n    p[0] = create_node()\n\ndef p_unary_expression_4(p):\n    'unary_expression : unary_operator cast_expression'\n    p[0] = create_node()\n\ndef p_unary_expression_5(p):\n    'unary_expression : SIZEOF unary_expression'\n    p[0] = create_node()\n\ndef p_unary_expression_6(p):\n    'unary_expression : SIZEOF LPAREN type_name RPAREN'\n    p[0] = create_node()\n    \n#unary-operator\ndef p_unary_operator(p):\n    '''unary_operator : AND\n                    | TIMES\n                    | PLUS \n                    | MINUS\n                    | NOT\n                    | LNOT '''\n    p[0] = create_node()\n\n# postfix-expression:\ndef p_postfix_expression_1(p):\n    'postfix_expression : primary_expression'\n    p[0] = create_node()\n\ndef p_postfix_expression_2(p):\n    'postfix_expression : postfix_expression LBRACKET expression RBRACKET'\n    p[0] = create_node()\n\ndef p_postfix_expression_3(p):\n    'postfix_expression : postfix_expression LPAREN argument_expression_list RPAREN'\n    p[0] = create_node()\n\ndef p_postfix_expression_4(p):\n    'postfix_expression : postfix_expression LPAREN RPAREN'\n    p[0] = create_node()\n\ndef p_postfix_expression_5(p):\n    'postfix_expression : postfix_expression PERIOD ID'\n    p[0] = create_node()\n\ndef p_postfix_expression_6(p):\n    'postfix_expression : postfix_expression ARROW ID'\n    p[0] = create_node()\n\ndef p_postfix_expression_7(p):\n    'postfix_expression : postfix_expression PLUSPLUS'\n    p[0] = create_node()\n\ndef p_postfix_expression_8(p):\n    'postfix_expression : postfix_expression MINUSMINUS'\n    p[0] = create_node()\n\n# primary-expression:\ndef p_primary_expression(p):\n    '''primary_expression :  ID\n                        |  constant\n                        |  SCONST\n                        |  LPAREN expression RPAREN'''\n    p[0] = create_node()\n\n# argument-expression-list:\ndef p_argument_expression_list(p):\n    '''argument_expression_list :  assignment_expression\n                              |  argument_expression_list COMMA assignment_expression'''\n    p[0] = create_node()\n\n# constant:\ndef p_constant(p): \n   '''constant : ICONST\n              | FCONST\n              | CCONST'''\n   p[0] = create_node()\n\n\ndef p_empty(p):\n    'empty : '\n    p[0] = create_node()\n\ndef p_error(p):\n    print(\"Whoa. We're hosed\")\n\nimport profile\n# Build the grammar\n\nyacc.yacc()\n#yacc.yacc(method='LALR',write_tables=False,debug=True)\n\n#profile.run(\"yacc.yacc(method='LALR')\")\n\n\n\n\n",
+			"file": "cparse.py",
+			"file_size": 20196,
+			"file_write_time": 130755354540000000,
+			"settings":
+			{
+				"buffer_size": 23826,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "main.py",
+			"settings":
+			{
+				"buffer_size": 737,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "c_ast.py",
+			"settings":
+			{
+				"buffer_size": 304,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Packages/Python/Python.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 73.0,
+		"last_filter": "rename",
+		"selected_items":
+		[
+			[
+				"rename",
+				"File: Rename"
+			],
+			[
+				"pci",
+				"Package Control: Install Package"
+			],
+			[
+				"sspy",
+				"Set Syntax: Python"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"ardu",
+				"Set Syntax: Arduino"
+			],
+			[
+				"bro",
+				"Preferences: Browse Packages"
+			],
+			[
+				"ssc++",
+				"Set Syntax: C++"
+			],
+			[
+				"ssc",
+				"Set Syntax: C++"
+			],
+			[
+				"ssjs",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"sshtml",
+				"Set Syntax: HTML"
+			],
+			[
+				"pc",
+				"Package Control: Remove Package"
+			],
+			[
+				"ssasm",
+				"Set Syntax: Assembly x86 (MASM compatible)"
+			],
+			[
+				"sspython",
+				"Set Syntax: Python"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"sspyth",
+				"Set Syntax: Python"
+			],
+			[
+				"wrap",
+				"Word Wrap: Toggle"
+			],
+			[
+				"wra",
+				"Word Wrap: Toggle"
+			],
+			[
+				"ssja",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"",
+				"Package Control: Install Package"
+			],
+			[
+				"ssjava",
+				"Set Syntax: Java"
+			],
+			[
+				"css",
+				"Set Syntax: CSS"
+			],
+			[
+				"wor",
+				"Word Wrap: Toggle"
+			],
+			[
+				"ssphp",
+				"Set Syntax: PHP"
+			],
+			[
+				"ssxml",
+				"Set Syntax: XML"
+			],
+			[
+				"ss c",
+				"Set Syntax: C#"
+			],
+			[
+				"htm",
+				"HTMLBeautify"
+			],
+			[
+				"word",
+				"Word Wrap: Toggle"
+			],
+			[
+				"java",
+				"Set Syntax: Java"
+			],
+			[
+				"git",
+				"Git: Commit"
+			],
+			[
+				"ssc+",
+				"Set Syntax: C++"
+			],
+			[
+				"c",
+				"Set Syntax: C"
+			],
+			[
+				"pcr",
+				"Package Control: Remove Package"
+			],
+			[
+				"wr",
+				"Word Wrap: Toggle"
+			],
+			[
+				"sshtm",
+				"Set Syntax: HTML"
+			],
+			[
+				"ssht",
+				"Set Syntax: HTML"
+			]
+		],
+		"width": 666.0
+	},
+	"console":
+	{
+		"height": 186.0,
+		"history":
+		[
+			"import urllib.request,os; pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Z/Source code/static_analyzer/c_grammar_ply/cyacc.py",
+		"/Z/Source code/static_analyzer/c_grammar_ply/cyacc.pyc",
+		"/Z/Source code/static_analyzer/c_grammar_ply/formSource.py",
+		"/C/scripts/ansic/test",
+		"/C/scripts/ansic/ansic.sublime-build",
+		"/Z/Source code/static_analyzer/c_grammar_ply/test.c",
+		"/Z/Source code/static_analyzer/ply-3.6/example/ansic/parser.out",
+		"/Z/Source code/static_analyzer/ply-3.6/example/ansic/clex.py",
+		"/Z/Source code/static_analyzer/ply-3.6/example/ansic/cparse.py",
+		"/Z/Source code/static_analyzer/c_grammar_ply/parser.py",
+		"/Z/Source code/static_analyzer/ply-3.6/example/ansic/main.py",
+		"/C/Downloads/Test",
+		"/C/Downloads/playlist.sh",
+		"/C/Users/w84thesun/Documents/Arduino/libraries/MMA7361/MMA7361.cpp",
+		"/C/Users/w84thesun/Desktop/SF9DOF_AHRS/SF9DOF_AHRS.ino",
+		"/C/Users/w84thesun/Desktop/SF9DOF_AHRS/DCM.ino",
+		"/C/Users/w84thesun/Desktop/SF9DOF_AHRS/Vector.ino",
+		"/C/Users/w84thesun/Desktop/SF9DOF_AHRS/matrix.ino",
+		"/C/Users/w84thesun/Desktop/SF9DOF_AHRS/SPI_helper_functions.ino",
+		"/C/Users/w84thesun/Desktop/SF9DOF_AHRS/ADC.ino",
+		"/C/Users/w84thesun/Documents/Arduino/board_ahrs/functions.ino",
+		"/C/Users/w84thesun/Desktop/SF9DOF_AHRS/README.TXT",
+		"/C/Users/w84thesun/AppData/Roaming/Sublime Text 3/Packages/User/Stino/Preferences.stino-settings",
+		"/Z/Work/Snowboard dev/Arduino/Snowboard/MMA7361/MMA7361.cpp",
+		"/C/Users/w84thesun/Documents/Arduino/libraries/AcceleroMMA7361/AcceleroMMA7361.cpp",
+		"/C/Users/w84thesun/Documents/Arduino/libraries/AcceleroMMA7361/AcceleroMMA7361.h",
+		"/C/Users/w84thesun/Documents/Arduino/sketch_nov22a/sketch_nov22a.ino",
+		"/Z/Work/Snowboard dev/Arduino/Snowboard/MMA7361/MMA7361.h",
+		"/C/Users/w84thesun/Documents/Arduino/board/board.ino",
+		"/C/Users/w84thesun/Documents/Arduino/board/functions.ino",
+		"/C/Users/w84thesun/AppData/Local/Temp/Temp1_DOC001092200.zip/MAG3110-Board code/STM32/Readme.txt",
+		"/C/Users/w84thesun/Documents/Arduino/sketch_nov19a/sketch_nov19a.ino",
+		"/C/Users/w84thesun/Documents/Arduino/ClockDisplay/ClockDisplay.ino",
+		"/C/Users/w84thesun/Documents/Arduino/libraries/TimerOne/TimerOne.cpp",
+		"/C/Users/w84thesun/Documents/Arduino/libraries/TM1637/TM1637.cpp",
+		"/C/Users/w84thesun/Documents/Arduino/libraries/TM1637/TM1637.h",
+		"/Z/Work/Snowboard dev/Arduino/arduimu_vD/arduimu_vD.ino",
+		"/Z/Work/Snowboard dev/Arduino/Snowboard/snowmain/snowmain.ino",
+		"/Z/Work/Snowboard dev/Arduino/board/board.ino",
+		"/C/Users/w84thesun/Documents/Arduino/libraries/MAG3110/MAG3110.cpp",
+		"/C/Users/w84thesun/Documents/Arduino/libraries/MAG3110/MAG3110.h",
+		"/C/Users/w84thesun/Documents/Arduino/libraries/MAG3110/keywords.txt",
+		"/C/Users/w84thesun/Documents/Arduino/libraries/MMA7361/keywords.txt",
+		"/C/temp/rainbowcrack-1.6.1-win64/readme.txt",
+		"/C/Program Files (x86)/Steam/SteamApps/common/hotline_miami/README.txt",
+		"/C/Users/w84thesun/AppData/Local/Temp/Temp1_HOTS-replays-SC2-by-EmpireTvZERG.zip/Прочтите и наслаждайтесь.txt",
+		"/C/Python27/Lib/site-packages/passlib/handlers/windows.py",
+		"/C/Python27/Lib/site-packages/passlib/utils/des.py",
+		"/C/Python27/Lib/site-packages/passlib/utils/__init__.py",
+		"/E/get_pass.py",
+		"/C/Python27/Lib/site-packages/passlib/utils/handlers.py",
+		"/C/asm/hla_hello_world.hla",
+		"/C/Users/w84thesun/Desktop/out1.c",
+		"/C/asm/hla_hello_world.asm",
+		"/C/Users/w84thesun/Desktop/ida-consonance.reg",
+		"/C/Users/w84thesun/Desktop/out.txt",
+		"/C/temp/form/style.css",
+		"/C/temp/form/contact.html",
+		"/C/temp/form/send.php",
+		"/C/temp/form/index.html",
+		"/C/temp/clanlord/clanlord.py",
+		"/C/Users/w84thesun/Desktop/ClanLord.win32/data/ClanLord.xml",
+		"/C/Users/w84thesun/Desktop/ClanLord.win32/data/Players.xml",
+		"/C/Users/w84thesun/Documents/Visual Studio 2012/Projects/reverse_practice/cpptests/Release/main.asm",
+		"/C/dos_progs/AUTOEXEC.BAT",
+		"/C/Users/w84thesun/Documents/Visual Studio 2012/Projects/reverse_practice/Release/out.txt",
+		"/C/Users/w84thesun/Documents/playlist.txt",
+		"/C/Users/w84thesun/Desktop/Samsung.scn",
+		"/C/Users/w84thesun/Desktop/Starcraft/StarCraft 1.15.2 enUS Installer/Installer.app/Contents/Resources/German.lproj/Localizable.strings",
+		"/C/Users/w84thesun/Desktop/client-v897-2015-02-01.1.c",
+		"/C/Users/w84thesun/Desktop/header.tpl",
+		"/C/Downloads/cpppo-master/server/enip/client.py",
+		"/C/Downloads/cpppo-master/server/enip/parser.py",
+		"/C/Users/w84thesun/Desktop/swap_test.py",
+		"/C/Users/w84thesun/Desktop/some_algo.py",
+		"/C/Users/w84thesun/Documents/Visual Studio 2012/Projects/reverse_practice/stack/Debug/main.asm",
+		"/C/hiew/hiew_ru.txt",
+		"/C/hiew/hiew8.ini",
+		"/C/hiew/register.txt",
+		"/C/hiew/license.txt",
+		"/C/Users/w84thesun/Documents/Visual Studio 2012/Projects/reverse_practice/stack/Debug/main.cod",
+		"/C/temp/MINIX/BOOKSRC/include/minix/sys_config.h",
+		"/C/temp/MINIX/BOOKSRC/include/minix/u64.h",
+		"/C/temp/MINIX/BOOKSRC/kernel/type.h",
+		"/C/Users/w84thesun/Documents/Visual Studio 2012/Projects/reverse_practice/scanf/scanf.asm",
+		"/C/Users/w84thesun/Documents/Visual Studio 2012/Projects/reverse_practice/pointers/Debug/main.asm",
+		"/C/Users/w84thesun/Documents/Visual Studio 2012/Projects/reverse_practice/pointers/Debug/main.cod",
+		"/C/temp/MINIX/BOOKSRC/kernel/system.c",
+		"/C/temp/MINIX/BOOKSRC/kernel/i8259.c",
+		"/C/temp/MINIX/BOOKSRC/servers/pm/time.c",
+		"/Z/Programs/Recovery[torrents.ru]/HDD Regenerator  1.51/HDD Regenerator  1.51/HDD.Regenerator_1.51/key.txt",
+		"/C/IFRToolLog.txt",
+		"/C/index.txt",
+		"/C/serial",
+		"/C/temp/MINIX/BOOKSRC/servers/fs/main.c",
+		"/C/temp/MINIX/BOOKSRC/include/signal.h",
+		"/C/temp/MINIX/BOOKSRC/servers/fs/read.c",
+		"/C/temp/MINIX/BOOKSRC/servers/fs/fs.h",
+		"/C/temp/MINIX/BOOKSRC/servers/init/init.c",
+		"/C/temp/MINIX/BOOKSRC/servers/pm/exec.c",
+		"/C/temp/MINIX/BOOKSRC/servers/fs/write.c",
+		"/C/temp/MINIX/BOOKSRC/servers/fs/file.h",
+		"/C/temp/MINIX/BOOKSRC/include/minix/callnr.h",
+		"/C/temp/MINIX/BOOKSRC/servers/fs/select.h",
+		"/C/temp/MINIX/BOOKSRC/drivers/tty/console.c",
+		"/C/temp/MINIX/BOOKSRC/drivers/tty/tty.c_b050922",
+		"/C/temp/MINIX/BOOKSRC/drivers/tty/tty.cdiff",
+		"/C/temp/MINIX/BOOKSRC/drivers/tty/tty.c051013",
+		"/C/Program Files/OpenVPN/easy-rsa/openssl-1.0.0.cnf",
+		"/C/Program Files/OpenVPN/easy-rsa/vars.bat",
+		"/C/Program Files/OpenVPN/config/w84thesun-openvpn.ovpn",
+		"/C/Users/w84thesun/options.txt",
+		"/C/Program Files/OpenVPN/easy-rsa/build-key.bat",
+		"/C/temp/MINIX/BOOKSRC/drivers/tty/vidcopy.s",
+		"/C/temp/MINIX/SETUP.PS",
+		"/D/INDEX.TXT",
+		"/C/Downloads/_test/Test",
+		"/C/temp/openvpn-gui-5/passphrase.c",
+		"/C/temp/openvpn-gui-5/localization.c",
+		"/C/temp/openvpn-build/msvc/build.tmp/openssl-1.0.0g/apps/openssl.c",
+		"/C/temp/openvpn-gui-5/localization.h",
+		"/C/temp/openvpn-gui-5/passphrase.h",
+		"/C/temp/openvpn-build/msvc/build.tmp/openssl-1.0.0g/crypto/pkcs12/pkcs12.h",
+		"/C/temp/openvpn-build/msvc/build.tmp/openssl-1.0.0g/doc/crypto/ui.pod",
+		"/C/temp/openvpn-build/msvc/build.tmp/openssl-1.0.0g/crypto/ui/ui_lib.c",
+		"/C/temp/openvpn-build/msvc/build.tmp/openssl-1.0.0g/crypto/pkcs12/p12_add.c",
+		"/C/temp/openvpn-build/msvc/build.tmp/openssl-1.0.0g/crypto/pkcs12/p12_p8e.c",
+		"/C/temp/openvpn-build/msvc/build.tmp/openssl-1.0.0g/crypto/pem/pem_pk8.c"
+	],
+	"find":
+	{
+		"height": 49.0
+	},
+	"find_in_files":
+	{
+		"height": 132.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"\\(t\\)",
+			"pass",
+			"sampleFreq",
+			"betaDef",
+			"beta",
+			"    <div style=\"color: white; font: Cuprum; font-size: 2.5em\">\n                <p>+7 (915) 055-62-30</p>\n        </div>",
+			"method",
+			"write",
+			"write	",
+			"write",
+			"/*",
+			"gen",
+			"cache",
+			"passw",
+			"pass",
+			"change",
+			"client",
+			"create ",
+			"\\s",
+			"\\W",
+			"moved into the area.",
+			"not be promoted too high",
+			"rtlunicode",
+			"rtlunicodeto",
+			"background-color",
+			"rounded",
+			"circle",
+			"intelli",
+			"U8SR0ns61",
+			"mtJ4y6rNg",
+			"а",
+			"(\\!|\\'|\\.|\\?)?P[YO!]+",
+			".+(Y|BE)",
+			"[PEN\\sA?]+",
+			"(A|\\?|\\?P|NP)+",
+			"[M-Q].[A-E][M-Q]",
+			".+[M-W]+",
+			"[^NAP\\s]+.",
+			"[MENSA?]+",
+			"[SNAKE]+..",
+			"[^APE]+.?",
+			"[^NAKED].?(UO|DUO)",
+			"[^BAT'S?]+",
+			"[^NAKED].?(UO|DUO)",
+			"[^APE]+.?",
+			"(A|\\?|\\?P|NP)+",
+			"	",
+			"(A|\\?|\\?P|NP)+",
+			"var_dump",
+			"va_dump",
+			"isrestricted",
+			"(\\.area)",
+			"(@font-face)",
+			"addbookmark",
+			");\n",
+			"MAG_ADDR",
+			"mag3110",
+			"\\w_Axis:\\s",
+			"\\t\\t",
+			",",
+			"ITG3200",
+			"cosf",
+			"sqrtf",
+			"cosf",
+			"sqrtf",
+			"sinf",
+			"cosf",
+			"sqrtf",
+			"AcceleroMMA",
+			"AvgCalibSampels",
+			"home.html",
+			"premium",
+			"^([0-9]{0,4})|(\\1\\,\\1\\,\\1)|(\\1\\-\\1\\,\\1\\-\\1)$",
+			"^[0-9]{0,4}|(((^([0-9]{0,4})|(\\1,\\1,\\1)|(\\1\\-\\1\\,\\1\\-\\1)$"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"(p)",
+			"p[0] = create_node()",
+			"",
+			"\\n",
+			"",
+			"\\n",
+			"\\n\\1",
+			"MAG_ADDRESS",
+			"MAG3110",
+			"",
+			";",
+			"\\t\\t",
+			"\\t",
+			"ITG",
+			"cos",
+			"sqrt",
+			"cos",
+			"sqrt",
+			"sin",
+			"cos",
+			"MMA",
+			"AvgCalibSamples"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "clex.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3922,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "cparse.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 23826,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5469,
+								5469
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3475.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "main.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 737,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								355,
+								355
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "c_ast.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 304,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								303,
+								303
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"auto_name": "",
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 39.0
+	},
+	"input":
+	{
+		"height": 43.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 265.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 190.0
+	},
+	"pinned_build_system": "",
+	"project": "ansic.sublime-project",
+	"replace":
+	{
+		"height": 80.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 225.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
