@@ -1,0 +1,145 @@
+    lex.py: 931:lex: tokens   = ('AUTO', 'BREAK', 'CASE', 'CHAR', 'CONST', 'CONTINUE', 'DEFAULT', 'DO', 'DOUBLE', 'ELSE', 'ENUM', 'EXTERN', 'FLOAT', 'FOR', 'GOTO', 'IF', 'INT', 'LONG', 'REGISTER', 'RETURN', 'SHORT', 'SIGNED', 'SIZEOF', 'STATIC', 'STRUCT', 'SWITCH', 'TYPEDEF', 'UNION', 'UNSIGNED', 'VOID', 'VOLATILE', 'WHILE', 'ID', 'TYPEID', 'ICONST', 'FCONST', 'SCONST', 'CCONST', 'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'MOD', 'OR', 'AND', 'NOT', 'XOR', 'LSHIFT', 'RSHIFT', 'LOR', 'LAND', 'LNOT', 'LT', 'LE', 'GT', 'GE', 'EQ', 'NE', 'EQUALS', 'TIMESEQUAL', 'DIVEQUAL', 'MODEQUAL', 'PLUSEQUAL', 'MINUSEQUAL', 'LSHIFTEQUAL', 'RSHIFTEQUAL', 'ANDEQUAL', 'XOREQUAL', 'OREQUAL', 'PLUSPLUS', 'MINUSMINUS', 'ARROW', 'CONDOP', 'LPAREN', 'RPAREN', 'LBRACKET', 'RBRACKET', 'LBRACE', 'RBRACE', 'COMMA', 'PERIOD', 'SEMI', 'COLON', 'ELLIPSIS')
+    lex.py: 932:lex: literals = ''
+    lex.py: 933:lex: states   = {'INITIAL': 'inclusive'}
+    lex.py: 962:lex: Adding rule t_NEWLINE -> '\n+' (state 'INITIAL')
+    lex.py: 962:lex: Adding rule t_ID -> '[A-Za-z_][\w_]*' (state 'INITIAL')
+    lex.py: 962:lex: Adding rule t_comment -> '/\*(.|\n)*?\*/' (state 'INITIAL')
+    lex.py: 962:lex: Adding rule t_preprocessor -> '\#(.)*?\n' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_FCONST -> '((\d+)(\.\d+)(e(\+|-)?(\d+))? | (\d+)e(\+|-)?(\d+))([lL]|[fF])?' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_ICONST -> '\d+([uU]|[lL]|[uU][lL]|[lL][uU])?' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_CCONST -> '(L)?\'([^\\\n]|(\\.))*?\'' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_SCONST -> '\"([^\\\n]|(\\.))*?\"' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_ELLIPSIS -> '\.\.\.' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_PLUSPLUS -> '\+\+' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LOR -> '\|\|' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_RSHIFTEQUAL -> '>>=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_XOREQUAL -> '\^=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_TIMESEQUAL -> '\*=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LSHIFTEQUAL -> '<<=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_OREQUAL -> '\|=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_PLUSEQUAL -> '\+=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_MINUSMINUS -> '--' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_GE -> '>=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_RBRACKET -> '\]' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LE -> '<=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_RPAREN -> '\)' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_PERIOD -> '\.' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LBRACKET -> '\[' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LPAREN -> '\(' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_NE -> '!=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_PLUS -> '\+' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_OR -> '\|' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_MINUSEQUAL -> '-=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_ANDEQUAL -> '&=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_MODEQUAL -> '%=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LBRACE -> '\{' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_DIVEQUAL -> '/=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_ARROW -> '->' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_XOR -> '\^' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_TIMES -> '\*' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_CONDOP -> '\?' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_RSHIFT -> '>>' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LAND -> '&&' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LSHIFT -> '<<' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_EQ -> '==' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_RBRACE -> '\}' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_COLON -> ':' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_COMMA -> ',' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_DIVIDE -> '/' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LT -> '<' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_AND -> '&' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_NOT -> '~' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_SEMI -> ';' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_MINUS -> '-' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_MOD -> '%' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_EQUALS -> '=' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_LNOT -> '!' (state 'INITIAL')
+    lex.py: 968:lex: Adding rule t_GT -> '>' (state 'INITIAL')
+    lex.py: 975:lex: ==== MASTER REGEXS FOLLOW ====
+    lex.py: 984:lex: state 'INITIAL' : regex[0] = '(?P<t_NEWLINE>\n+)|(?P<t_ID>[A-Za-z_][\w_]*)|(?P<t_comment>/\*(.|\n)*?\*/)|(?P<t_preprocessor>\#(.)*?\n)|(?P<t_FCONST>((\d+)(\.\d+)(e(\+|-)?(\d+))? | (\d+)e(\+|-)?(\d+))([lL]|[fF])?)|(?P<t_ICONST>\d+([uU]|[lL]|[uU][lL]|[lL][uU])?)|(?P<t_CCONST>(L)?\'([^\\\n]|(\\.))*?\')|(?P<t_SCONST>\"([^\\\n]|(\\.))*?\")|(?P<t_ELLIPSIS>\.\.\.)|(?P<t_PLUSPLUS>\+\+)|(?P<t_LOR>\|\|)|(?P<t_RSHIFTEQUAL>>>=)|(?P<t_XOREQUAL>\^=)|(?P<t_TIMESEQUAL>\*=)|(?P<t_LSHIFTEQUAL><<=)|(?P<t_OREQUAL>\|=)|(?P<t_PLUSEQUAL>\+=)|(?P<t_MINUSMINUS>--)|(?P<t_GE>>=)|(?P<t_RBRACKET>\])|(?P<t_LE><=)|(?P<t_RPAREN>\))|(?P<t_PERIOD>\.)|(?P<t_LBRACKET>\[)|(?P<t_LPAREN>\()|(?P<t_NE>!=)|(?P<t_PLUS>\+)|(?P<t_OR>\|)|(?P<t_MINUSEQUAL>-=)|(?P<t_ANDEQUAL>&=)|(?P<t_MODEQUAL>%=)|(?P<t_LBRACE>\{)|(?P<t_DIVEQUAL>/=)|(?P<t_ARROW>->)|(?P<t_XOR>\^)|(?P<t_TIMES>\*)|(?P<t_CONDOP>\?)|(?P<t_RSHIFT>>>)|(?P<t_LAND>&&)|(?P<t_LSHIFT><<)|(?P<t_EQ>==)|(?P<t_RBRACE>\})|(?P<t_COLON>:)|(?P<t_COMMA>,)|(?P<t_DIVIDE>/)|(?P<t_LT><)|(?P<t_AND>&)|(?P<t_NOT>~)|(?P<t_SEMI>;)|(?P<t_MINUS>-)|(?P<t_MOD>%)|(?P<t_EQUALS>=)|(?P<t_LNOT>!)|(?P<t_GT>>)'
+   yacc.py: 360:PLY: PARSE DEBUG START
+   yacc.py: 408:
+   yacc.py: 409:State  : 0
+   yacc.py: 433:Stack  : . LexToken(TYPEDEF,'typedef',1,0)
+   yacc.py: 443:Action : Shift and goto state 19
+   yacc.py: 408:
+   yacc.py: 409:State  : 19
+   yacc.py: 433:Stack  : TYPEDEF . LexToken(VOID,'void',1,8)
+   yacc.py: 469:Action : Reduce rule [storage_class_specifier -> TYPEDEF] with ['typedef'] and goto state 1
+   yacc.py: 503:Result : <str @ 0x1ee43e0> ('typedef')
+   yacc.py: 408:
+   yacc.py: 409:State  : 1
+   yacc.py: 433:Stack  : storage_class_specifier . LexToken(VOID,'void',1,8)
+   yacc.py: 443:Action : Shift and goto state 6
+   yacc.py: 408:
+   yacc.py: 409:State  : 6
+   yacc.py: 433:Stack  : storage_class_specifier VOID . LexToken(TIMES,'*',1,13)
+   yacc.py: 469:Action : Reduce rule [type_specifier -> VOID] with ['void'] and goto state 13
+   yacc.py: 503:Result : <str @ 0x2173480> ('void')
+   yacc.py: 408:
+   yacc.py: 409:State  : 13
+   yacc.py: 433:Stack  : storage_class_specifier type_specifier . LexToken(TIMES,'*',1,13)
+   yacc.py: 469:Action : Reduce rule [declaration_specifiers -> type_specifier] with ['void'] and goto state 38
+   yacc.py: 503:Result : <str @ 0x2173480> ('void')
+   yacc.py: 408:
+   yacc.py: 409:State  : 38
+   yacc.py: 433:Stack  : storage_class_specifier declaration_specifiers . LexToken(TIMES,'*',1,13)
+   yacc.py: 469:Action : Reduce rule [declaration_specifiers -> storage_class_specifier declaration_specifiers] with ['typedef','void'] and goto state 24
+   yacc.py: 503:Result : <instance @ 0x20f3a80> (<c_ast.Node instance at 0x020F3A80>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 24
+   yacc.py: 433:Stack  : declaration_specifiers . LexToken(TIMES,'*',1,13)
+   yacc.py: 443:Action : Shift and goto state 23
+   yacc.py: 408:
+   yacc.py: 409:State  : 23
+   yacc.py: 433:Stack  : declaration_specifiers TIMES . LexToken(ID,'LPVOID',1,14)
+   yacc.py: 469:Action : Reduce rule [pointer -> TIMES] with ['*'] and goto state 11
+   yacc.py: 503:Result : <str @ 0x1ef7278> ('*')
+   yacc.py: 408:
+   yacc.py: 409:State  : 11
+   yacc.py: 433:Stack  : declaration_specifiers pointer . LexToken(ID,'LPVOID',1,14)
+   yacc.py: 443:Action : Shift and goto state 26
+   yacc.py: 408:
+   yacc.py: 409:State  : 26
+   yacc.py: 433:Stack  : declaration_specifiers pointer ID . LexToken(SEMI,';',1,20)
+   yacc.py: 469:Action : Reduce rule [direct_declarator -> ID] with ['LPVOID'] and goto state 42
+   yacc.py: 503:Result : <str @ 0x2173640> ('LPVOID')
+   yacc.py: 408:
+   yacc.py: 409:State  : 42
+   yacc.py: 433:Stack  : declaration_specifiers pointer direct_declarator . LexToken(SEMI,';',1,20)
+   yacc.py: 469:Action : Reduce rule [declarator -> pointer direct_declarator] with ['*','LPVOID'] and goto state 55
+   yacc.py: 503:Result : <instance @ 0x20f3b20> (<c_ast.Node instance at 0x020F3B20>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 55
+   yacc.py: 433:Stack  : declaration_specifiers declarator . LexToken(SEMI,';',1,20)
+   yacc.py: 469:Action : Reduce rule [init_declarator -> declarator] with [<instance @ 0x20f3b20>] and goto state 54
+   yacc.py: 503:Result : <instance @ 0x20f3b20> (<c_ast.Node instance at 0x020F3B20>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 54
+   yacc.py: 433:Stack  : declaration_specifiers init_declarator . LexToken(SEMI,';',1,20)
+   yacc.py: 469:Action : Reduce rule [init_declarator_list -> init_declarator] with [<instance @ 0x20f3b20>] and goto state 53
+   yacc.py: 503:Result : <instance @ 0x20f3b20> (<c_ast.Node instance at 0x020F3B20>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 53
+   yacc.py: 433:Stack  : declaration_specifiers init_declarator_list . LexToken(SEMI,';',1,20)
+   yacc.py: 443:Action : Shift and goto state 118
+   yacc.py: 408:
+   yacc.py: 409:State  : 118
+   yacc.py: 433:Stack  : declaration_specifiers init_declarator_list SEMI . $end
+   yacc.py: 469:Action : Reduce rule [declaration -> declaration_specifiers init_declarator_list SEMI] with [<instance @ 0x20f3a80>,<instance @ 0x20f3b20>,';'] and goto state 25
+   yacc.py: 503:Result : <instance @ 0x20f3ad0> (<c_ast.Node instance at 0x020F3AD0>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 25
+   yacc.py: 433:Stack  : declaration . $end
+   yacc.py: 469:Action : Reduce rule [external_declaration -> declaration] with [<instance @ 0x20f3ad0>] and goto state 12
+   yacc.py: 503:Result : <instance @ 0x20f3ad0> (<c_ast.Node instance at 0x020F3AD0>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 12
+   yacc.py: 433:Stack  : external_declaration . $end
+   yacc.py: 469:Action : Reduce rule [translation_unit -> external_declaration] with [<instance @ 0x20f3ad0>] and goto state 18
+   yacc.py: 503:Result : <instance @ 0x20f3ad0> (<c_ast.Node instance at 0x020F3AD0>)
+   yacc.py: 408:
+   yacc.py: 409:State  : 18
+   yacc.py: 433:Stack  : translation_unit . $end
+   yacc.py: 564:Done   : Returning <instance @ 0x20f3ad0> (<c_ast.Node instance at 0x020F3AD0>)
+   yacc.py: 565:PLY: PARSE DEBUG END

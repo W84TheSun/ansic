@@ -1,6 +1,6 @@
 #encoding: utf-8
-key_nodes = set([ 'test' ])
-exclude_attrs= set([ 'type', 'children' ])
+key_nodes = set([ 't' ])
+exclude_attrs= set([ 'children', 'type' ])
 
 class Node:
     def __init__(self, type, children):
