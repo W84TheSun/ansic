@@ -1,2 +1,2 @@
-This example is incomplete.  Was going to specify an ANSI C parser.
-This is part of it.
+ANSI C parser based on PLY example. By now it's only pretty printing
+input line or simple files.
