@@ -13,7 +13,7 @@ from c_ast import *
 tokens = clex.tokens
 
 #TODO:
-# 1. change [p[1], p[2], ...] with p[1:]
+# 1. change p[1:]
 # 2. make sure opt statements work as they should
 
 # translation-unit:
@@ -40,52 +40,52 @@ def p_external_declaration_2(p):
 
 def p_function_definition_1(p):
     'function_definition : declaration_specifiers declarator declaration_list compound_statement'
-    p[0] = create_node('function_definition' , [p[1], p[2], p[3], p[4]])
+    p[0] = create_node('function_definition' , p[1:])
 
 def p_function_definition_2(p):
     'function_definition : declarator declaration_list compound_statement'
-    p[0] = create_node('function_definition', [p[1], p[2], p[3]])
+    p[0] = create_node('function_definition', p[1:])
 
 def p_function_definition_3(p):
     'function_definition : declarator compound_statement'
-    p[0] = create_node('function_definition', [p[1], p[2]])
+    p[0] = create_node('function_definition', p[1:])
 
 def p_function_definition_4(p):
     'function_definition : declaration_specifiers declarator compound_statement'
-    p[0] = create_node('function_definition', [p[1], p[2], p[3]])
+    p[0] = create_node('function_definition', p[1:])
 
 # declaration:
 
 def p_declaration_1(p):
     'declaration : declaration_specifiers init_declarator_list SEMI'
-    p[0] = create_node('declaration', [p[1], p[2]])
+    p[0] = create_node('declaration', p[1:])
 
 def p_declaration_2(p):
     'declaration : declaration_specifiers SEMI'
-    p[0] = create_node('declaration', [p[1], p[2]])
+    p[0] = create_node('declaration', p[1:])
 
 # declaration-list:
 
 def p_declaration_list_1(p):
     'declaration_list : declaration'
-    p[0] = create_node('declaration_list', p[0])
+    p[0] = create_node('declaration_list', p[1:])
 
 def p_declaration_list_2(p):
     'declaration_list : declaration_list declaration '
-    p[0] = create_node('declaration_list', [p[1], p[2]])
+    p[0] = create_node('declaration_list', p[1:])
 
 # declaration-specifiers
 def p_declaration_specifiers_1(p):
     'declaration_specifiers : storage_class_specifier declaration_specifiers'
-    p[0] = create_node('declaration_specifiers', [p[1], p[2]])
+    p[0] = create_node('declaration_specifiers', p[1:])
 
 def p_declaration_specifiers_2(p):
     'declaration_specifiers : type_specifier declaration_specifiers'
-    p[0] = create_node('declaration_specifiers', [p[1], p[2]])
+    p[0] = create_node('declaration_specifiers', p[1:])
 
 def p_declaration_specifiers_3(p):
     'declaration_specifiers : type_qualifier declaration_specifiers'
-    p[0] = create_node('declaration_specifiers', [p[1], p[2]])
+    p[0] = create_node('declaration_specifiers', p[1:])
 
 def p_declaration_specifiers_4(p):
     'declaration_specifiers : storage_class_specifier'
@@ -136,15 +136,15 @@ def p_type_qualifier(p):
 
 def p_struct_or_union_specifier_1(p):
     'struct_or_union_specifier : struct_or_union ID LBRACE struct_declaration_list RBRACE'
-    p[0] = create_node('struct_or_union_specifier', [p[1], p[2], p[3], p[4]])
+    p[0] = create_node('struct_or_union_specifier', p[1:])
 
 def p_struct_or_union_specifier_2(p):
     'struct_or_union_specifier : struct_or_union LBRACE struct_declaration_list RBRACE'
-    p[0] = create_node('struct_or_union_specifier', [p[1], p[2], p[3], p[4]])
+    p[0] = create_node('struct_or_union_specifier', p[1:])
 
 def p_struct_or_union_specifier_3(p):
     'struct_or_union_specifier : struct_or_union ID'
-    p[0] = create_node('struct_or_union_specifier', [p[1], p[2]])
+    p[0] = create_node('struct_or_union_specifier', p[1:])
 
 # struct-or-union:
 def p_struct_or_union(p):
@@ -161,7 +161,7 @@ def p_struct_declaration_list_1(p):
 
 def p_struct_declaration_list_2(p):
     'struct_declaration_list : struct_declaration_list struct_declaration'
-    p[0] = create_node('struct_declaration_list', [p[1], p[2]])
+    p[0] = create_node('struct_declaration_list', p[1:])
 
 # init-declarator-list:
 
@@ -171,7 +171,7 @@ def p_init_declarator_list_1(p):
 
 def p_init_declarator_list_2(p):
     'init_declarator_list : init_declarator_list COMMA init_declarator'
-    p[0] = create_node('init_declarator_list', [p[1], p[2], p[3]])
+    p[0] = create_node('init_declarator_list', p[1:])
 
 # init-declarator
 
@@ -181,19 +181,19 @@ def p_init_declarator_1(p):
 
 def p_init_declarator_2(p):
     'init_declarator : declarator EQUALS initializer'
-    p[0] = create_node('init_declarator', [p[1], p[2], p[3]])
+    p[0] = create_node('init_declarator', p[1:])
 
 # struct-declaration:
 
 def p_struct_declaration(p):
     'struct_declaration : specifier_qualifier_list struct_declarator_list SEMI'
-    p[0] = create_node('struct_declaration', [p[1], p[2], p[3]])
+    p[0] = create_node('struct_declaration', p[1:])
 
 # specifier-qualifier-list:
 
 def p_specifier_qualifier_list_1(p):
     'specifier_qualifier_list : type_specifier specifier_qualifier_list'
-    p[0] = create_node('specifier_qualifier_list', [p[1], p[2]])
+    p[0] = create_node('specifier_qualifier_list', p[1:])
 
 def p_specifier_qualifier_list_2(p):
     'specifier_qualifier_list : type_specifier'
@@ -201,7 +201,7 @@ def p_specifier_qualifier_list_2(p):
 
 def p_specifier_qualifier_list_3(p):
     'specifier_qualifier_list : type_qualifier specifier_qualifier_list'
-    p[0] = create_node('specifier_qualifier_list', [p[1], p[2]])
+    p[0] = create_node('specifier_qualifier_list', p[1:])
 
 def p_specifier_qualifier_list_4(p):
     'specifier_qualifier_list : type_qualifier'
@@ -215,7 +215,7 @@ def p_struct_declarator_list_1(p):
 
 def p_struct_declarator_list_2(p):
     'struct_declarator_list : struct_declarator_list COMMA struct_declarator'
-    p[0] = create_node('struct_declarator_list', [p[1], p[2], p[3]])
+    p[0] = create_node('struct_declarator_list', p[1:])
 
 # struct-declarator:
 
@@ -225,25 +225,25 @@ def p_struct_declarator_1(p):
 
 def p_struct_declarator_2(p):
     'struct_declarator : declarator COLON constant_expression'
-    p[0] = create_node('struct_declarator', [p[1], p[2], p[3]])
+    p[0] = create_node('struct_declarator', p[1:])
 
 def p_struct_declarator_3(p):
     'struct_declarator : COLON constant_expression'
-    p[0] = create_node('struct_declarator', [p[1], p[2]])
+    p[0] = create_node('struct_declarator', p[1:])
 
 # enum-specifier:
 
 def p_enum_specifier_1(p):
     'enum_specifier : ENUM ID LBRACE enumerator_list RBRACE'
-    p[0] = create_node('enum_specifier', [p[1], p[2], p[3], p[4]])
+    p[0] = create_node('enum_specifier', p[1:])
 
 def p_enum_specifier_2(p):
     'enum_specifier : ENUM LBRACE enumerator_list RBRACE'
-    p[0] = create_node('enum_specifier', [p[1], p[2], p[3]])
+    p[0] = create_node('enum_specifier', p[1:])
 
 def p_enum_specifier_3(p):
     'enum_specifier : ENUM ID'
-    p[0] = create_node('enum_specifier', [p[1], p[2]])
+    p[0] = create_node('enum_specifier', p[1:])
 
 # enumerator_list:
 def p_enumerator_list_1(p):
@@ -252,7 +252,7 @@ def p_enumerator_list_1(p):
 
 def p_enumerator_list_2(p):
     'enumerator_list : enumerator_list COMMA enumerator'
-    p[0] = create_node('enumerator_list', [p[1], p[2], p[3]])
+    p[0] = create_node('enumerator_list', p[1:])
 
 # enumerator:
 def p_enumerator_1(p):
@@ -261,13 +261,13 @@ def p_enumerator_1(p):
 
 def p_enumerator_2(p):
     'enumerator : ID EQUALS constant_expression'
-    p[0] = create_node('enumerator', [p[1], p[2], p[3]])
+    p[0] = create_node('enumerator', p[1:])
 
 # declarator:
 
 def p_declarator_1(p):
     'declarator : pointer direct_declarator'
-    p[0] = create_node('declarator', [p[1], p[2]])
+    p[0] = create_node('declarator', p[1:])
 
 def p_declarator_2(p):
     'declarator : direct_declarator'
@@ -281,28 +281,28 @@ def p_direct_declarator_1(p):
 
 def p_direct_declarator_2(p):
     'direct_declarator : LPAREN declarator RPAREN'
-    p[0] = create_node('direct_declarator', [p[1], p[2], p[3]])
+    p[0] = create_node('direct_declarator', p[1:])
 
 def p_direct_declarator_3(p):
     'direct_declarator : direct_declarator LBRACKET constant_expression_opt RBRACKET'
-    p[0] = create_node('direct_declarator', [p[1], p[2], p[3], p[4]])
+    p[0] = create_node('direct_declarator', p[1:])
 
 def p_direct_declarator_4(p):
     'direct_declarator : direct_declarator LPAREN parameter_type_list RPAREN '
-    p[0] = create_node('direct_declarator', [p[1], p[2], p[3], p[4]])
+    p[0] = create_node('direct_declarator', p[1:])
 
 def p_direct_declarator_5(p):
     'direct_declarator : direct_declarator LPAREN identifier_list RPAREN '
-    p[0] = create_node('direct_declarator', [p[1], p[2], p[3], p[4]])
+    p[0] = create_node('direct_declarator', p[1:])
 
 def p_direct_declarator_6(p):
     'direct_declarator : direct_declarator LPAREN RPAREN '
-    p[0] = create_node('direct_declarator', [p[1], p[2], p[3]])
+    p[0] = create_node('direct_declarator', p[1:])
 
 # pointer:
 def p_pointer_1(p):
     'pointer : TIMES type_qualifier_list'
-    p[0] = create_node('pointer', [p[1], p[2]])
+    p[0] = create_node('pointer', p[1:])
 
 def p_pointer_2(p):
     'pointer : TIMES'
@@ -310,11 +310,11 @@ def p_pointer_2(p):
 
 def p_pointer_3(p):
     'pointer : TIMES type_qualifier_list pointer'
-    p[0] = create_node('pointer', [p[1], p[2], p[3]])
+    p[0] = create_node('pointer', p[1:])
 
 def p_pointer_4(p):
     'pointer : TIMES pointer'
-    p[0] = create_node('pointer', [p[1], p[2]])
+    p[0] = create_node('pointer', p[1:])
 
 # type-qualifier-list:
 
@@ -324,7 +324,7 @@ def p_type_qualifier_list_1(p):
 
 def p_type_qualifier_list_2(p):
     'type_qualifier_list : type_qualifier_list type_qualifier'
-    p[0] = create_node('type_qualifier_list', [p[1], p[2]])
+    p[0] = create_node('type_qualifier_list', p[1:])
 
 # parameter-type-list:
 
@@ -334,7 +334,7 @@ def p_parameter_type_list_1(p):
 
 def p_parameter_type_list_2(p):
     'parameter_type_list : parameter_list COMMA ELLIPSIS'
-    p[0] = create_node('parameter_type_list', [p[1], p[2], p[3]])
+    p[0] = create_node('parameter_type_list', p[1:])
 
 # parameter-list:
 
@@ -344,16 +344,16 @@ def p_parameter_list_1(p):
 
 def p_parameter_list_2(p):
     'parameter_list : parameter_list COMMA parameter_declaration'
-    p[0] = create_node('parameter_list', [p[1], p[2], p[3]])
+    p[0] = create_node('parameter_list', p[1:])
 
 # parameter-declaration:
 def p_parameter_declaration_1(p):
     'parameter_declaration : declaration_specifiers declarator'
-    p[0] = create_node('parameter_declaration', [p[1], p[2]])
+    p[0] = create_node('parameter_declaration', p[1:])
 
 def p_parameter_declaration_2(p):
     'parameter_declaration : declaration_specifiers abstract_declarator_opt'
-    p[0] = create_node('parameter_declaration', [p[1], p[2]])
+    p[0] = create_node('parameter_declaration', p[1:])
 
 # identifier-list:
 def p_identifier_list_1(p):
@@ -362,7 +362,7 @@ def p_identifier_list_1(p):
 
 def p_identifier_list_2(p):
     'identifier_list : identifier_list COMMA ID'
-    p[0] = create_node('identifier_list', [p[1], p[2], p[3]])
+    p[0] = create_node('identifier_list', p[1:])
 
 # initializer:
 
@@ -374,9 +374,9 @@ def p_initializer_2(p):
     '''initializer : LBRACE initializer_list RBRACE
                    | LBRACE initializer_list COMMA RBRACE'''
     if len(p) == 4:
-        p[0] = create_node('initializer', [p[1], p[2], p[3]])
+        p[0] = create_node('initializer', p[1:])
     else:
-        p[0] = create_node('initializer', [p[1], p[2], p[3], p[4]])
+        p[0] = create_node('initializer', p[1:])
 
 # initializer-list:
 
@@ -386,13 +386,13 @@ def p_initializer_list_1(p):
 
 def p_initializer_list_2(p):
     'initializer_list : initializer_list COMMA initializer'
-    p[0] = create_node('initializer_list', [p[1], p[2], p[3]])
+    p[0] = create_node('initializer_list', p[1:])
 
 # type-name:
 
 def p_type_name(p):
     'type_name : specifier_qualifier_list abstract_declarator_opt'
-    p[0] = create_node('type_name', [p[1], p[1]])
+    p[0] = create_node('type_name', p[1:])
 
 def p_abstract_declarator_opt_1(p):
     'abstract_declarator_opt : empty'
@@ -410,7 +410,7 @@ def p_abstract_declarator_1(p):
 
 def p_abstract_declarator_2(p):
     'abstract_declarator : pointer direct_abstract_declarator'
-    p[0] = create_node('abstract_declarator', [p[1], p[2]])
+    p[0] = create_node('abstract_declarator', p[1:])
 
 def p_abstract_declarator_3(p):
     'abstract_declarator : direct_abstract_declarator'
@@ -420,23 +420,23 @@ def p_abstract_declarator_3(p):
 
 def p_direct_abstract_declarator_1(p):
     'direct_abstract_declarator : LPAREN abstract_declarator RPAREN'
-    p[0] = create_node('direct_abstract_declarator', [p[1], p[2], p[3]])
+    p[0] = create_node('direct_abstract_declarator', p[1:])
 
 def p_direct_abstract_declarator_2(p):
     'direct_abstract_declarator : direct_abstract_declarator LBRACKET constant_expression_opt RBRACKET'
-    p[0] = create_node('direct_abstract_declarator', [p[1], p[2], p[3], p[4]])
+    p[0] = create_node('direct_abstract_declarator', p[1:])
 
 def p_direct_abstract_declarator_3(p):
     'direct_abstract_declarator : LBRACKET constant_expression_opt RBRACKET'
-    p[0] = create_node('direct_abstract_declarator', [p[1], p[2], p[3]])
+    p[0] = create_node('direct_abstract_declarator', p[1:])
 
 def p_direct_abstract_declarator_4(p):
     'direct_abstract_declarator : direct_abstract_declarator LPAREN parameter_type_list_opt RPAREN'
-    p[0] = create_node('direct_abstract_declarator', [p[1], p[2], p[3], p[4]])
+    p[0] = create_node('direct_abstract_declarator', p[1:])
 
 def p_direct_abstract_declarator_5(p):
     'direct_abstract_declarator : LPAREN parameter_type_list_opt RPAREN'
-    p[0] = create_node('direct_abstract_declarator', [p[1], p[2], p[3]])
+    p[0] = create_node('direct_abstract_declarator', p[1:])
 
 # Optional fields in abstract declarators
 
@@ -473,7 +473,7 @@ def p_statement(p):
 
 def p_labeled_statement_1(p):
     'labeled_statement : ID COLON statement'
-    p[0] = create_node('labeled_statement', [p[1], p[2], p[3]])
+    p[0] = create_node('labeled_statement', p[1:])
 
 def p_labeled_statement_2(p):
     'labeled_statement : CASE constant_expression COLON statement'

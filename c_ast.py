@@ -1,8 +1,8 @@
 #encoding: utf-8
-key_nodes = set([ 't' ])
+key_nodes = set([ 'external_declaration', 'translation_unit', 'declarator', 'type_specifier', 'storage_class_specifier' ])
 exclude_attrs= set([ 'children', 'type' ])
 
-class Node:
+class Node(object):
     def __init__(self, type, children):
         self.type = type
         self.children = children
@@ -12,7 +12,7 @@ class Node:
         
         # Представляем переменные объекта как XML аттрибуты
         for attr in self.__dict__:
-            if not attr in exclude_attrs:
+            if attr not in exclude_attrs:
                 s += ' %s="%s"' % (attr, self.__dict__[attr])
         
         # Рекурсивно генерируем все подузлы, не забывая про отступы
@@ -28,18 +28,25 @@ class Node:
 
 def unwrap(children):
     
+    print type(children)
+
     nodes = []
 
     for c in children:
+        # print c.__class__.__name__
+        print type(c)
         if isinstance(c, list):
+            # print 'extending'
             nodes.extend(unwrap(c))
         else:
+            # print 'try to append'
             nodes.append(c)
 
     return nodes
 
 def create_node(type, children):
-    nodes = unwrap(children)
+    # nodes = unwrap(children)
+    nodes = children
     
     left = nodes[0]
     if isinstance(left, Node) and type == left.type:
@@ -57,5 +64,3 @@ def create_node(type, children):
         return Node(type, nodes)
     else:
         return nodes[0]
-
-
